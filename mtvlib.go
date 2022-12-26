@@ -537,17 +537,6 @@ func IntTransformersHandler(c echo.Context) error {
 
 func IntSTTVHandler(c echo.Context) error {
 	log.Println("STTVHandler started")
-	// u, err := url.Parse(r.URL.String())
-	// if err != nil {
-	// 	log.Println("STTVHandler url parse error")
-	// 	log.Println(err)
-	// }
-	// m, eff := url.ParseQuery(u.RawQuery)
-	// if eff != nil {
-	// 	log.Println("usrl parsequery error")
-	// 	log.Println(eff)
-	// }
-	// s1 := c.QueryParam("season")
 	s1 := c.QueryParam("season")
 	ses := DBcon()
 	defer ses.Close()
