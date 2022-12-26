@@ -32,5 +32,5 @@ func main() {
 
 	e.GET("/IntActionHandler", IntActionHandler)
 	e.GET("/IntCartoons", IntCartoonsHandler)
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":8888"))
 }
