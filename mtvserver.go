@@ -62,5 +62,6 @@ func main() {
 
 	e.GET("/STTV", IntSTTVHandler)
 	
+	e.Static("/static", "/root/static")
 	e.Logger.Fatal(e.Start(":8888"))
 }

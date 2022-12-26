@@ -11,19 +11,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/globalsign/mgo"
+	// "github.com/globalsign/mgo"
 )
 
-// TVDBcon is exported for all our db connection objects
-func TVDBcon() *mgo.Session {
-	fmt.Println("Starting Update db session")
-	s, err := mgo.Dial(os.Getenv("MTV_MONGODB_ADDRESS"))
-	if err != nil {
-		fmt.Println("this is dial err")
-		panic(err)
-	}
-	return s
-}
 func UUID() string {
 	aseed := time.Now()
 	aSeed := aseed.UnixNano()
@@ -52,7 +42,7 @@ func ProcessTVShowInfo(pAth string) {
 	log.Println("\n\n Process_TVShows has started")
 	tvpicPath := os.Getenv("MTV_NO_ART_PIC_PATH")
 	TvI := getTvShowInfo(pAth, tvpicPath)
-	ses := TVDBcon()
+	ses := DBcon()
 	defer ses.Close()
 	MTc := ses.DB("tvgobs").C("tvgobs")
 	err := MTc.Insert(&TvI)
@@ -91,17 +81,6 @@ func TVShowsDirVisit(pAth string, f os.FileInfo, err error) error {
 	return nil
 }
 
-// func setupLogging() {
-// 	logfile := os.Getenv("MTV_LOG_BASE_PATH") + "/moviegobsTV.log"
-// 	// If the file doesn't exist, create it or append to the file
-// 	file, err := os.OpenFile(logfile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	log.SetOutput(file)
-// 	log.Println("Logging started")
-// }
-
 //TVSetUp is exported to main
 func TVSetUp() {
 	// setupLogging()
@@ -109,7 +88,7 @@ func TVSetUp() {
 	startTime := time.Now().Unix()
 	fmt.Printf("setup function has started at: %T", startTime)
 	//Connect to the DB
-	sess := TVDBcon()
+	sess := DBcon()
 	err := sess.DB("tvgobs").DropDatabase()
 	if err != nil {
 		fmt.Println(err)

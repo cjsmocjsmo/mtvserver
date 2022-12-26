@@ -20,23 +20,13 @@
 package main
 
 import (
-	// "encoding/json"
 	"fmt"
-	// "io/ioutil"
-	"log"
-	"net/http"
-
-	// "net/url"
-	"os"
-
-	"github.com/labstack/echo/v4"
-
-	// "github.com/cjsmocjsmo/movgo"
-	// "github.com/cjsmocjsmo/tvgo"
 	"github.com/globalsign/mgo"
 	"github.com/globalsign/mgo/bson"
-	// "github.com/gorilla/handlers"
-	// "github.com/gorilla/mux"
+	"github.com/labstack/echo/v4"
+	"log"
+	"net/http"
+	"os"
 )
 
 // DBcon is exported because I want it
@@ -557,7 +547,7 @@ func IntSTTVHandler(c echo.Context) error {
 	// 	log.Println("usrl parsequery error")
 	// 	log.Println(eff)
 	// }
-	// s1 := m["season"][0]
+	// s1 := c.QueryParam("season")
 	s1 := c.QueryParam("season")
 	ses := DBcon()
 	defer ses.Close()
@@ -574,1222 +564,701 @@ func IntSTTVHandler(c echo.Context) error {
 	return c.JSON(http.StatusOK, STTVMedia)
 }
 
-// func IntTNGHandler(c echo.Context) error {
-// 	log.Println("TNGHandler started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("TNGHandler url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var nextGenerationMedia []map[string]string
-// 	b1 := bson.M{"catagory": "TNG", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&nextGenerationMedia)
-// 	if errG != nil {
-// 		log.Println("TNGHandler db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, nextGenerationMedia)
-// }
+func IntTNGHandler(c echo.Context) error {
+	log.Println("TNGHandler started")
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var nextGenerationMedia []map[string]string
+	b1 := bson.M{"catagory": "TNG", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&nextGenerationMedia)
+	if errG != nil {
+		log.Println("TNGHandler db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, nextGenerationMedia)
+}
 
-// func IntEnterpriseHandler(c echo.Context) error {
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var enterpriseMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Enterprise", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&enterpriseMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, enterpriseMedia)
-// }
+func IntEnterpriseHandler(c echo.Context) error {
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var enterpriseMedia []map[string]string
+	b1 := bson.M{"catagory": "Enterprise", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&enterpriseMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, enterpriseMedia)
+}
 
-// func IntDiscoveryHandler(c echo.Context) error {
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var discoveryMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Discovery", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&discoveryMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, discoveryMedia)
-// }
+func IntDiscoveryHandler(c echo.Context) error {
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var discoveryMedia []map[string]string
+	b1 := bson.M{"catagory": "Discovery", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&discoveryMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, discoveryMedia)
+}
 
-// func IntVoyagerHandler(c echo.Context) error {
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var voyagerMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Voyager", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&voyagerMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, voyagerMedia)
+func IntVoyagerHandler(c echo.Context) error {
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var voyagerMedia []map[string]string
+	b1 := bson.M{"catagory": "Voyager", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&voyagerMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, voyagerMedia)
 
-// }
+}
 
-// func IntOrvilleHandler(c echo.Context) error {
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTtc := ses.DB("tvgobs").C("tvgobs")
-// 	var OrvilleMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Orville", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTtc.Find(b1).Select(b2).Sort("episode").All(&OrvilleMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, OrvilleMedia)
-// }
+func IntOrvilleHandler(c echo.Context) error {
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTtc := ses.DB("tvgobs").C("tvgobs")
+	var OrvilleMedia []map[string]string
+	b1 := bson.M{"catagory": "Orville", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTtc.Find(b1).Select(b2).Sort("episode").All(&OrvilleMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, OrvilleMedia)
+}
 
-// func IntLostInSpaceHandler(c echo.Context) error {
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTtc := ses.DB("tvgobs").C("tvgobs")
-// 	var LostInSpaceMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Lost In Space", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTtc.Find(b1).Select(b2).Sort("episode").All(&LostInSpaceMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	log.Println(&LostInSpaceMedia)
-// 	return c.JSON(http.StatusOK, LostInSpaceMedia)
-// }
+func IntLostInSpaceHandler(c echo.Context) error {
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTtc := ses.DB("tvgobs").C("tvgobs")
+	var LostInSpaceMedia []map[string]string
+	b1 := bson.M{"catagory": "Lost In Space", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTtc.Find(b1).Select(b2).Sort("episode").All(&LostInSpaceMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	log.Println(&LostInSpaceMedia)
+	return c.JSON(http.StatusOK, LostInSpaceMedia)
+}
 
-// func IntPicardHandler(c echo.Context) error {
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTtc := ses.DB("tvgobs").C("tvgobs")
-// 	var PicardMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Picard", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTtc.Find(b1).Select(b2).Sort("episode").All(&PicardMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	log.Println(&PicardMedia)
-// 	return c.JSON(http.StatusOK, PicardMedia)
-// }
+func IntPicardHandler(c echo.Context) error {
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTtc := ses.DB("tvgobs").C("tvgobs")
+	var PicardMedia []map[string]string
+	b1 := bson.M{"catagory": "Picard", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTtc.Find(b1).Select(b2).Sort("episode").All(&PicardMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	log.Println(&PicardMedia)
+	return c.JSON(http.StatusOK, PicardMedia)
+}
 
-// func IntMandalorianHandler(c echo.Context) error {
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTtc := ses.DB("tvgobs").C("tvgobs")
-// 	var MandalorianMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Mandalorian", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTtc.Find(b1).Select(b2).Sort("episode").All(&MandalorianMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	log.Println(&MandalorianMedia)
-// 	return c.JSON(http.StatusOK, MandalorianMedia)
-// }
+func IntMandalorianHandler(c echo.Context) error {
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTtc := ses.DB("tvgobs").C("tvgobs")
+	var MandalorianMedia []map[string]string
+	b1 := bson.M{"catagory": "Mandalorian", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTtc.Find(b1).Select(b2).Sort("episode").All(&MandalorianMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	log.Println(&MandalorianMedia)
+	return c.JSON(http.StatusOK, MandalorianMedia)
+}
 
-// func IntAlteredCarbonHandler(c echo.Context) error {
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var alteredcarbonMedia []map[string]string
-// 	b1 := bson.M{"catagory": "AlteredCarbon", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&alteredcarbonMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, alteredcarbonMedia)
-// }
+func IntAlteredCarbonHandler(c echo.Context) error {
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var alteredcarbonMedia []map[string]string
+	b1 := bson.M{"catagory": "AlteredCarbon", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&alteredcarbonMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, alteredcarbonMedia)
+}
 
-// func IntLowerDecksHandler(c echo.Context) error {
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var lowerdecksMedia []map[string]string
-// 	b1 := bson.M{"catagory": "LowerDecks", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&lowerdecksMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, lowerdecksMedia)
-// }
+func IntLowerDecksHandler(c echo.Context) error {
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var lowerdecksMedia []map[string]string
+	b1 := bson.M{"catagory": "LowerDecks", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&lowerdecksMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, lowerdecksMedia)
+}
 
-// func IntRaisedByWolvesHandler(c echo.Context) error {
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var raisedbywolvesMedia []map[string]string
-// 	b1 := bson.M{"catagory": "RaisedByWolves", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&raisedbywolvesMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, raisedbywolvesMedia)
-// }
+func IntRaisedByWolvesHandler(c echo.Context) error {
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var raisedbywolvesMedia []map[string]string
+	b1 := bson.M{"catagory": "RaisedByWolves", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&raisedbywolvesMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, raisedbywolvesMedia)
+}
 
-// func IntForAllManKindHandler(c echo.Context) error {
-// 	log.Println("Starting initForAllManKind")
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	log.Println(s1)
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var forallmankindMedia []map[string]string
-// 	b1 := bson.M{"catagory": "ForAllManKind", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&forallmankindMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, forallmankindMedia)
-// }
+func IntForAllManKindHandler(c echo.Context) error {
+	log.Println("Starting initForAllManKind")
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	log.Println(s1)
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var forallmankindMedia []map[string]string
+	b1 := bson.M{"catagory": "ForAllManKind", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&forallmankindMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, forallmankindMedia)
+}
 
-// func IntAlienWorldsHandler(c echo.Context) error {
-// 	log.Println("Starting initAlienWorlds")
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	log.Println(s1)
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var alienworldsMedia []map[string]string
-// 	b1 := bson.M{"catagory": "AlienWorlds", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&alienworldsMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, alienworldsMedia)
-// }
+func IntAlienWorldsHandler(c echo.Context) error {
+	log.Println("Starting initAlienWorlds")
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	log.Println(s1)
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var alienworldsMedia []map[string]string
+	b1 := bson.M{"catagory": "AlienWorlds", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&alienworldsMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, alienworldsMedia)
+}
 
-// func IntWandaVisionHandler(c echo.Context) error {
-// 	log.Println("Starting initWandaVision")
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	log.Println(s1)
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var wandavisionMedia []map[string]string
-// 	b1 := bson.M{"catagory": "WandaVision", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&wandavisionMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, wandavisionMedia)
-// }
+func IntWandaVisionHandler(c echo.Context) error {
+	log.Println("Starting initWandaVision")
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	log.Println(s1)
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var wandavisionMedia []map[string]string
+	b1 := bson.M{"catagory": "WandaVision", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&wandavisionMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, wandavisionMedia)
+}
 
-// func IntFalconWInterSoldierHandler(c echo.Context) error {
-// 	log.Println("Starting IntFalconWInterSoldier")
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	log.Println(s1)
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var lokiMedia []map[string]string
-// 	b1 := bson.M{"catagory": "FalconWInterSoldier", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&lokiMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, lokiMedia)
-// }
+func IntFalconWInterSoldierHandler(c echo.Context) error {
+	log.Println("Starting IntFalconWInterSoldier")
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	log.Println(s1)
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var lokiMedia []map[string]string
+	b1 := bson.M{"catagory": "FalconWInterSoldier", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&lokiMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, lokiMedia)
+}
 
-// func IntLokiHandler(c echo.Context) error {
-// 	log.Println("Starting IntLoki")
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	log.Println(s1)
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var lokiMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Loki", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&lokiMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	log.Println(lokiMedia)
-// 	return c.JSON(http.StatusOK, lokiMedia)
-// }
+func IntLokiHandler(c echo.Context) error {
+	log.Println("Starting IntLoki")
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	log.Println(s1)
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var lokiMedia []map[string]string
+	b1 := bson.M{"catagory": "Loki", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&lokiMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	log.Println(lokiMedia)
+	return c.JSON(http.StatusOK, lokiMedia)
+}
 
-// func IntWhatIfHandler(c echo.Context) error {
-// 	log.Println("Starting IntWhatIf")
-// 	log.Println(" started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println(" url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	log.Println(s1)
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var whatifMedia []map[string]string
-// 	b1 := bson.M{"catagory": "WhatIf", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&whatifMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	log.Println(whatifMedia)
-// 	return c.JSON(http.StatusOK, whatifMedia)
-// }
+func IntWhatIfHandler(c echo.Context) error {
+	log.Println("Starting IntWhatIf")
+	log.Println(" started")
+	s1 := c.QueryParam("season")
+	log.Println(s1)
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var whatifMedia []map[string]string
+	b1 := bson.M{"catagory": "WhatIf", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&whatifMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	log.Println(whatifMedia)
+	return c.JSON(http.StatusOK, whatifMedia)
+}
 
-// func IntYTheLastManHandler(c echo.Context) error {
-// 	log.Println("Starting IntYTheLastMan")
-// 	log.Println("YTheLastMan started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("YTheLastManHandler url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("YTheLastManHandler usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	log.Println(s1)
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var YTheLastManMedia []map[string]string
-// 	b1 := bson.M{"catagory": "YTheLastMan", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&YTheLastManMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	log.Println(YTheLastManMedia)
-// 	return c.JSON(http.StatusOK, YTheLastManMedia)
-// }
+func IntYTheLastManHandler(c echo.Context) error {
+	log.Println("Starting IntYTheLastMan")
+	s1 := c.QueryParam("season")
+	log.Println(s1)
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var YTheLastManMedia []map[string]string
+	b1 := bson.M{"catagory": "YTheLastMan", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&YTheLastManMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	log.Println(YTheLastManMedia)
+	return c.JSON(http.StatusOK, YTheLastManMedia)
+}
 
-// func IntFoundationHandler(c echo.Context) error {
-// 	log.Println("Starting Foundation")
-// 	log.Println("Foundation started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("Foundation url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("Foundation usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	log.Println(s1)
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var FoundationMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Foundation", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&FoundationMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	log.Println(FoundationMedia)
-// 	return c.JSON(http.StatusOK, FoundationMedia)
-// }
+func IntFoundationHandler(c echo.Context) error {
+	log.Println("Starting Foundation")
+	s1 := c.QueryParam("season")
+	log.Println(s1)
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var FoundationMedia []map[string]string
+	b1 := bson.M{"catagory": "Foundation", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&FoundationMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	log.Println(FoundationMedia)
+	return c.JSON(http.StatusOK, FoundationMedia)
+}
 
-// func IntVisionsHandler(c echo.Context) error {
-// 	log.Println("Starting Visions")
-// 	log.Println("Visions started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("Visions url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("Visions usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	log.Println(s1)
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var VisionsMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Visions", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&VisionsMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	log.Println(VisionsMedia)
-// 	return c.JSON(http.StatusOK, VisionsMedia)
-// }
+func IntVisionsHandler(c echo.Context) error {
+	log.Println("Starting Visions")
+	s1 := c.QueryParam("season")
+	log.Println(s1)
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var VisionsMedia []map[string]string
+	b1 := bson.M{"catagory": "Visions", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&VisionsMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	log.Println(VisionsMedia)
+	return c.JSON(http.StatusOK, VisionsMedia)
+}
 
-// func IntProdigyHandler(c echo.Context) error {
-// 	log.Println("Starting Prodigy")
-// 	log.Println("Prodigy started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("Prodigy url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("Prodigy usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	log.Println(s1)
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var ProdigyMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Prodigy", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&ProdigyMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	log.Println(ProdigyMedia)
-// 	return c.JSON(http.StatusOK, ProdigyMedia)
-// }
+func IntProdigyHandler(c echo.Context) error {
+	log.Println("Starting Prodigy")
+	s1 := c.QueryParam("season")
+	log.Println(s1)
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var ProdigyMedia []map[string]string
+	b1 := bson.M{"catagory": "Prodigy", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&ProdigyMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	log.Println(ProdigyMedia)
+	return c.JSON(http.StatusOK, ProdigyMedia)
+}
 
-// func IntTheBadBatchHandler(c echo.Context) error {
-// 	log.Println("TheBadBatch started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("parse url string error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var thebadbatchMedia []map[string]string
-// 	b1 := bson.M{"catagory": "TheBadBatch", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&thebadbatchMedia)
-// 	if errG != nil {
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, thebadbatchMedia)
-// }
+func IntTheBadBatchHandler(c echo.Context) error {
+	log.Println("TheBadBatch started")
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var thebadbatchMedia []map[string]string
+	b1 := bson.M{"catagory": "TheBadBatch", "season": s1}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&thebadbatchMedia)
+	if errG != nil {
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, thebadbatchMedia)
+}
 
-// func IntMastersOfTheUniverseHandler(c echo.Context) error {
-// 	log.Println("MastersOfTheUniverse started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("MastersOfTheUniverse url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var mastersOfTheUniverseMedia []map[string]string
-// 	b1 := bson.M{"catagory": "MastersOfTheUniverse", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&mastersOfTheUniverseMedia)
-// 	if errG != nil {
-// 		log.Println("mastersOfTheUniverse db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, mastersOfTheUniverseMedia)
-// }
+func IntMastersOfTheUniverseHandler(c echo.Context) error {
+	log.Println("MastersOfTheUniverse started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var mastersOfTheUniverseMedia []map[string]string
+	b1 := bson.M{"catagory": "MastersOfTheUniverse", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&mastersOfTheUniverseMedia)
+	if errG != nil {
+		log.Println("mastersOfTheUniverse db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, mastersOfTheUniverseMedia)
+}
 
-// func IntWheelOfTimeHandler(c echo.Context) error {
-// 	log.Println("WheelOfTime started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("WheelOfTime url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var wheeloftimeMedia []map[string]string
-// 	b1 := bson.M{"catagory": "WheelOfTime", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&wheeloftimeMedia)
-// 	if errG != nil {
-// 		log.Println("WheelOfTime db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, wheeloftimeMedia)
-// }
+func IntWheelOfTimeHandler(c echo.Context) error {
+	log.Println("WheelOfTime started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var wheeloftimeMedia []map[string]string
+	b1 := bson.M{"catagory": "WheelOfTime", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&wheeloftimeMedia)
+	if errG != nil {
+		log.Println("WheelOfTime db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, wheeloftimeMedia)
+}
 
-// func IntCowboyBebopHandler(c echo.Context) error {
-// 	log.Println("CowboyBebop started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("CowboyBebop url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var CowboyBebopMedia []map[string]string
-// 	b1 := bson.M{"catagory": "CowboyBebop", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&CowboyBebopMedia)
-// 	if errG != nil {
-// 		log.Println("CowboyBebop db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, CowboyBebopMedia)
-// }
+func IntCowboyBebopHandler(c echo.Context) error {
+	log.Println("CowboyBebop started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var CowboyBebopMedia []map[string]string
+	b1 := bson.M{"catagory": "CowboyBebop", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&CowboyBebopMedia)
+	if errG != nil {
+		log.Println("CowboyBebop db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, CowboyBebopMedia)
+}
 
-// func IntHawkeyeHandler(c echo.Context) error {
-// 	log.Println("Hawkeye started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("Hawkeye url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var HawkeyeMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Hawkeye", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&HawkeyeMedia)
-// 	if errG != nil {
-// 		log.Println("Hawkeye db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, HawkeyeMedia)
-// }
+func IntHawkeyeHandler(c echo.Context) error {
+	log.Println("Hawkeye started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var HawkeyeMedia []map[string]string
+	b1 := bson.M{"catagory": "Hawkeye", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&HawkeyeMedia)
+	if errG != nil {
+		log.Println("Hawkeye db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, HawkeyeMedia)
+}
 
-// func IntBookOfBobaFettHandler(c echo.Context) error {
-// 	log.Println("BookOfBobaFett started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("BookOfBobaFett url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var BookOfBobaFettMedia []map[string]string
-// 	b1 := bson.M{"catagory": "BookOfBobaFett", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&BookOfBobaFettMedia)
-// 	if errG != nil {
-// 		log.Println("BookOfBobaFett db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, BookOfBobaFettMedia)
-// }
+func IntBookOfBobaFettHandler(c echo.Context) error {
+	log.Println("BookOfBobaFett started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var BookOfBobaFettMedia []map[string]string
+	b1 := bson.M{"catagory": "BookOfBobaFett", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&BookOfBobaFettMedia)
+	if errG != nil {
+		log.Println("BookOfBobaFett db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, BookOfBobaFettMedia)
+}
 
-// func IntReacherHandler(c echo.Context) error {
-// 	log.Println("Reacher started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("Reacher url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var ReacherMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Reacher", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&ReacherMedia)
-// 	if errG != nil {
-// 		log.Println("Reacher db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, ReacherMedia)
-// }
+func IntReacherHandler(c echo.Context) error {
+	log.Println("Reacher started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var ReacherMedia []map[string]string
+	b1 := bson.M{"catagory": "Reacher", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&ReacherMedia)
+	if errG != nil {
+		log.Println("Reacher db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, ReacherMedia)
+}
 
-// func IntHaloHandler(c echo.Context) error {
-// 	log.Println("Halo started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("Halo url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var HaloMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Halo", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&HaloMedia)
-// 	if errG != nil {
-// 		log.Println("Halo db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, HaloMedia)
-// }
+func IntHaloHandler(c echo.Context) error {
+	log.Println("Halo started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var HaloMedia []map[string]string
+	b1 := bson.M{"catagory": "Halo", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&HaloMedia)
+	if errG != nil {
+		log.Println("Halo db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, HaloMedia)
+}
 
-// func IntMoonKnightHandler(c echo.Context) error {
-// 	log.Println("MoonKnight started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("MoonKnight url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var MoonKnightMedia []map[string]string
-// 	b1 := bson.M{"catagory": "MoonKnight", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&MoonKnightMedia)
-// 	if errG != nil {
-// 		log.Println("MoonKnight db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, MoonKnightMedia)
-// }
+func IntMoonKnightHandler(c echo.Context) error {
+	log.Println("MoonKnight started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var MoonKnightMedia []map[string]string
+	b1 := bson.M{"catagory": "MoonKnight", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&MoonKnightMedia)
+	if errG != nil {
+		log.Println("MoonKnight db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, MoonKnightMedia)
+}
 
-// func IntStrangeNewWorldsHandler(c echo.Context) error {
-// 	log.Println("StrangeNewWorlds started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("StrangeNewWorlds url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var StrangeNewWorldsMedia []map[string]string
-// 	b1 := bson.M{"catagory": "StrangeNewWorlds", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&StrangeNewWorldsMedia)
-// 	if errG != nil {
-// 		log.Println("StrangeNewWorlds db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, StrangeNewWorldsMedia)
-// }
+func IntStrangeNewWorldsHandler(c echo.Context) error {
+	log.Println("StrangeNewWorlds started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var StrangeNewWorldsMedia []map[string]string
+	b1 := bson.M{"catagory": "StrangeNewWorlds", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&StrangeNewWorldsMedia)
+	if errG != nil {
+		log.Println("StrangeNewWorlds db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, StrangeNewWorldsMedia)
+}
 
-// func IntArnoldHandler(c echo.Context) error {
-// 	log.Println("IntArnoldHandler started")
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTc := ses.DB("moviegobs").C("moviegobs")
-// 	var arnoldMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Arnold"}
-// 	b2 := bson.M{"_id": 0}
-// 	err := MTc.Find(b1).Select(b2).All(&arnoldMedia)
-// 	if err != nil {
-// 		log.Printf("arnoldMedia db call error")
-// 		log.Println(err)
-// 	}
-// 	return c.JSON(http.StatusOK, arnoldMedia)
-// }
+func IntArnoldHandler(c echo.Context) error {
+	log.Println("IntArnoldHandler started")
+	ses := DBcon()
+	defer ses.Close()
+	MTc := ses.DB("moviegobs").C("moviegobs")
+	var arnoldMedia []map[string]string
+	b1 := bson.M{"catagory": "Arnold"}
+	b2 := bson.M{"_id": 0}
+	err := MTc.Find(b1).Select(b2).All(&arnoldMedia)
+	if err != nil {
+		log.Printf("arnoldMedia db call error")
+		log.Println(err)
+	}
+	return c.JSON(http.StatusOK, arnoldMedia)
+}
 
-// func IntPrehistoricPlanetHandler(c echo.Context) error {
-// 	log.Println("PrehistoricPlanet started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("PrehistoricPlanet url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var PrehistoricPlanetMedia []map[string]string
-// 	b1 := bson.M{"catagory": "PrehistoricPlanet", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&PrehistoricPlanetMedia)
-// 	if errG != nil {
-// 		log.Println("PrehistoricPlanet db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, PrehistoricPlanetMedia)
-// }
+func IntPrehistoricPlanetHandler(c echo.Context) error {
+	log.Println("PrehistoricPlanet started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var PrehistoricPlanetMedia []map[string]string
+	b1 := bson.M{"catagory": "PrehistoricPlanet", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&PrehistoricPlanetMedia)
+	if errG != nil {
+		log.Println("PrehistoricPlanet db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, PrehistoricPlanetMedia)
+}
 
-// func IntObiWanKenobiHandler(c echo.Context) error {
-// 	log.Println("ObiWanKenobi started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("ObiWanKenobi url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var ObiWanKenobiMedia []map[string]string
-// 	b1 := bson.M{"catagory": "ObiWanKenobi", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&ObiWanKenobiMedia)
-// 	if errG != nil {
-// 		log.Println("ObiWanKenobi db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, ObiWanKenobiMedia)
-// }
+func IntObiWanKenobiHandler(c echo.Context) error {
+	log.Println("ObiWanKenobi started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var ObiWanKenobiMedia []map[string]string
+	b1 := bson.M{"catagory": "ObiWanKenobi", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&ObiWanKenobiMedia)
+	if errG != nil {
+		log.Println("ObiWanKenobi db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, ObiWanKenobiMedia)
+}
 
-// func IntMSMarvelHandler(c echo.Context) error {
-// 	log.Println("MSMarvel started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("MSMarvel url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var MSMarvelMedia []map[string]string
-// 	b1 := bson.M{"catagory": "MSMarvel", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&MSMarvelMedia)
-// 	if errG != nil {
-// 		log.Println("MSMarvel db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, MSMarvelMedia)
-// }
+func IntMSMarvelHandler(c echo.Context) error {
+	log.Println("MSMarvel started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var MSMarvelMedia []map[string]string
+	b1 := bson.M{"catagory": "MSMarvel", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&MSMarvelMedia)
+	if errG != nil {
+		log.Println("MSMarvel db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, MSMarvelMedia)
+}
 
-// func IntIAmGrootHandler(c echo.Context) error {
-// 	log.Println("IAmGroot started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("IAmGroot url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var IAmGrootMedia []map[string]string
-// 	b1 := bson.M{"catagory": "IAmGroot", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&IAmGrootMedia)
-// 	if errG != nil {
-// 		log.Println("IAmGroot db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, IAmGrootMedia)
-// }
+func IntIAmGrootHandler(c echo.Context) error {
+	log.Println("IAmGroot started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var IAmGrootMedia []map[string]string
+	b1 := bson.M{"catagory": "IAmGroot", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&IAmGrootMedia)
+	if errG != nil {
+		log.Println("IAmGroot db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, IAmGrootMedia)
+}
 
-// func IntSheHulkHandler(c echo.Context) error {
-// 	log.Println("SheHulk started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("SheHulk url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var SheHulkMedia []map[string]string
-// 	b1 := bson.M{"catagory": "SheHulk", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&SheHulkMedia)
-// 	if errG != nil {
-// 		log.Println("SheHulkMedia db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, SheHulkMedia)
-// }
+func IntSheHulkHandler(c echo.Context) error {
+	log.Println("SheHulk started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var SheHulkMedia []map[string]string
+	b1 := bson.M{"catagory": "SheHulk", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&SheHulkMedia)
+	if errG != nil {
+		log.Println("SheHulkMedia db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, SheHulkMedia)
+}
 
-// func IntHouseOfTheDragonHandler(c echo.Context) error {
-// 	log.Println("HouseOfTheDragon started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("HouseOfTheDragon url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var HouseOfTheDragonMedia []map[string]string
-// 	b1 := bson.M{"catagory": "HouseOfTheDragon", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&HouseOfTheDragonMedia)
-// 	if errG != nil {
-// 		log.Println("HouseOfTheDragonMedia db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, HouseOfTheDragonMedia)
-// }
+func IntHouseOfTheDragonHandler(c echo.Context) error {
+	log.Println("HouseOfTheDragon started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var HouseOfTheDragonMedia []map[string]string
+	b1 := bson.M{"catagory": "HouseOfTheDragon", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&HouseOfTheDragonMedia)
+	if errG != nil {
+		log.Println("HouseOfTheDragonMedia db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, HouseOfTheDragonMedia)
+}
 
-// func IntTheLordOfTheRingsTheRingsOfPowerHandler(c echo.Context) error {
-// 	log.Println("TheLordOfTheRingsTheRingsOfPower started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("TheLordOfTheRingsTheRingsOfPower url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var TheLordOfTheRingsTheRingsOfPowerMedia []map[string]string
-// 	b1 := bson.M{"catagory": "TheLordOfTheRingsTheRingsOfPower", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&TheLordOfTheRingsTheRingsOfPowerMedia)
-// 	if errG != nil {
-// 		log.Println("TheLordOfTheRingsTheRingsOfPowerMedia db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, TheLordOfTheRingsTheRingsOfPowerMedia)
-// }
+func IntTheLordOfTheRingsTheRingsOfPowerHandler(c echo.Context) error {
+	log.Println("TheLordOfTheRingsTheRingsOfPower started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var TheLordOfTheRingsTheRingsOfPowerMedia []map[string]string
+	b1 := bson.M{"catagory": "TheLordOfTheRingsTheRingsOfPower", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&TheLordOfTheRingsTheRingsOfPowerMedia)
+	if errG != nil {
+		log.Println("TheLordOfTheRingsTheRingsOfPowerMedia db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, TheLordOfTheRingsTheRingsOfPowerMedia)
+}
 
-// func IntAndorHandler(c echo.Context) error {
-// 	log.Println("Andor started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("Andor url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var AndorMedia []map[string]string
-// 	b1 := bson.M{"catagory": "Andor", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&AndorMedia)
-// 	if errG != nil {
-// 		log.Println("AndorMedia db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, AndorMedia)
-// }
+func IntAndorHandler(c echo.Context) error {
+	log.Println("Andor started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var AndorMedia []map[string]string
+	b1 := bson.M{"catagory": "Andor", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&AndorMedia)
+	if errG != nil {
+		log.Println("AndorMedia db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, AndorMedia)
+}
 
-// func IntNightSkyHandler(c echo.Context) error {
-// 	log.Println("NightSky started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("NightSky url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var NightSkyMedia []map[string]string
-// 	b1 := bson.M{"catagory": "NightSky", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&NightSkyMedia)
-// 	if errG != nil {
-// 		log.Println("NightSky db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, NightSkyMedia)
-// }
+func IntNightSkyHandler(c echo.Context) error {
+	log.Println("NightSky started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var NightSkyMedia []map[string]string
+	b1 := bson.M{"catagory": "NightSky", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&NightSkyMedia)
+	if errG != nil {
+		log.Println("NightSky db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, NightSkyMedia)
+}
 
-// func IntTalesOfTheJediHandler(c echo.Context) error {
-// 	log.Println("TalesOfTheJedi started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("url parse error")
-// 		log.Println(err)
-// 	}
-// 	_, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("TalesOfTheJedi url parse querry error")
-// 		log.Println(eff)
-// 	}
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var TalesOfTheJediMedia []map[string]string
-// 	b1 := bson.M{"catagory": "TalesOfTheJedi", "season": `01`}
-// 	b2 := bson.M{"_id": 0}
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&TalesOfTheJediMedia)
-// 	if errG != nil {
-// 		log.Println("TalesOfTheJedi db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, TalesOfTheJediMedia)
-// }
-
-// func setupLogging() {
-// 	logfile := os.Getenv("MTV_LOG_BASE_PATH") + "/moviegobsServer.log"
-// 	// If the file doesn't exist, create it or append to the file
-// 	file, err := os.OpenFile(logfile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	log.SetOutput(file)
-// 	log.Println("Logging started")
-// }
-
-// func init() {
-// 	setupLogging()
-// 	// movgo.MOVSetup()
-// 	// tvgo.TVSetUp()
-
-// }
-
-// func main() {
-// 	r := mux.NewRouter()
-// 	s := r.PathPrefix("/static").Subrouter()
-// 	r.HandleFunc("/IntAction", IntActionHandler)
-// 	r.HandleFunc("/IntCartoons", IntCartoonsHandler)
-// 	r.HandleFunc("/IntComedy", IntComedyHandler)
-// 	r.HandleFunc("/IntDrama", IntDramaHandler)
-// 	r.HandleFunc("/IntFantasy", IntFantasyHandler)
-// 	r.HandleFunc("/IntGodzilla", IntGodzillaHandler)
-// 	r.HandleFunc("/IntHarryPotter", IntHarryPotterHandler)
-// 	r.HandleFunc("/IntIndianaJones", IntIndianaJonesHandler)
-// 	r.HandleFunc("/IntMenInBlack", IntMenInBlackHandler)
-// 	r.HandleFunc("/IntMisc", IntMiscHandler)
-// 	r.HandleFunc("/IntJohnWayne", IntJohnWayneHandler)
-// 	r.HandleFunc("/IntJurassicPark", IntJurassicParkHandler)
-// 	r.HandleFunc("/IntKingsMan", IntKingsManHandler)
-// 	r.HandleFunc("/IntSciFi", IntSciFiHandler)
-// 	r.HandleFunc("/IntStarTrek", IntStarTrekHandler)
-// 	r.HandleFunc("/IntStarWars", IntStarWarsHandler)
-// 	r.HandleFunc("/IntSuperHeros", IntSuperHerosHandler)
-// 	r.HandleFunc("/IntTremors", IntTremorsHandler)
-// 	r.HandleFunc("/IntJohnWick", IntJohnWickHandler)
-// 	r.HandleFunc("/IntPirates", IntPiratesHandler)
-// 	r.HandleFunc("/IntBruceWillis", IntBruceWillisHandler)
-// 	r.HandleFunc("/IntRiddick", IntRiddickHandler)
-// 	r.HandleFunc("/IntTomCruize", IntTomCruizeHandler)
-// 	r.HandleFunc("/IntXMen", IntXMenHandler)
-// 	r.HandleFunc("/IntDocumentary", IntDocumentaryHandler)
-// 	r.HandleFunc("/IntTheRock", IntTheRockHandler)
-// 	r.HandleFunc("/MovUpdate", MovUpdateHandler)
-// 	r.HandleFunc("/IntNicolasCage", IntNicolasCageHandler)
-// 	r.HandleFunc("/IntArnold", IntArnoldHandler)
-// 	r.HandleFunc("/IntJamesBond", IntJamesBondHandler)
-// 	r.HandleFunc("/IntTransformers", IntTransformersHandler)
-// 	//TVGOBS_SETUP
-// 	r.HandleFunc("/IntFalconWInterSoldier", IntFalconWInterSoldierHandler)
-// 	r.HandleFunc("/IntAlteredCarbon", IntAlteredCarbonHandler)
-// 	r.HandleFunc("/IntAlienWorlds", IntAlienWorldsHandler)
-// 	r.HandleFunc("/IntDiscovery", IntDiscoveryHandler)
-// 	r.HandleFunc("/IntEnterprise", IntEnterpriseHandler)
-// 	r.HandleFunc("/IntForAllManKind", IntForAllManKindHandler)
-// 	r.HandleFunc("/IntLostInSpace", IntLostInSpaceHandler)
-// 	r.HandleFunc("/IntLowerDecks", IntLowerDecksHandler)
-// 	r.HandleFunc("/IntMandalorian", IntMandalorianHandler)
-// 	r.HandleFunc("/IntOrville", IntOrvilleHandler)
-// 	r.HandleFunc("/IntPicard", IntPicardHandler)
-// 	r.HandleFunc("/IntRaisedByWolves", IntRaisedByWolvesHandler)
-// 	r.HandleFunc("/IntSTTV", IntSTTVHandler)
-// 	r.HandleFunc("/IntTNG", IntTNGHandler)
-// 	r.HandleFunc("/IntVoyager", IntVoyagerHandler)
-// 	r.HandleFunc("/IntWandaVision", IntWandaVisionHandler)
-// 	r.HandleFunc("/IntMastersOfTheUniverse", IntMastersOfTheUniverseHandler)
-// 	r.HandleFunc("/IntLoki", IntLokiHandler)
-// 	r.HandleFunc("/IntTheBadBatch", IntTheBadBatchHandler)
-// 	r.HandleFunc("/IntWhatIf", IntWhatIfHandler)
-// 	r.HandleFunc("/IntYTheLastMan", IntYTheLastManHandler)
-// 	r.HandleFunc("/IntFoundation", IntFoundationHandler)
-// 	r.HandleFunc("/IntVisions", IntVisionsHandler)
-// 	r.HandleFunc("/IntProdigy", IntProdigyHandler)
-// 	r.HandleFunc("/IntWheelOfTime", IntWheelOfTimeHandler)
-// 	r.HandleFunc("/IntCowboyBebop", IntCowboyBebopHandler)
-// 	r.HandleFunc("/IntHawkeye", IntHawkeyeHandler)
-// 	r.HandleFunc("/IntBookOfBobaFett", IntBookOfBobaFettHandler)
-// 	r.HandleFunc("/IntReacher", IntReacherHandler)
-// 	r.HandleFunc("/IntHalo", IntHaloHandler)
-// 	r.HandleFunc("/IntMoonKnight", IntMoonKnightHandler)
-// 	r.HandleFunc("/IntStrangeNewWorlds", IntStrangeNewWorldsHandler)
-// 	r.HandleFunc("/IntPrehistoricPlanet", IntPrehistoricPlanetHandler)
-// 	r.HandleFunc("/IntObiWanKenobi", IntObiWanKenobiHandler)
-// 	r.HandleFunc("/IntMSMarvel", IntMSMarvelHandler)
-// 	r.HandleFunc("/IntIAmGroot", IntIAmGrootHandler)
-// 	r.HandleFunc("/IntSheHulk", IntSheHulkHandler)
-
-// 	r.HandleFunc("/IntHouseOfTheDragon", IntHouseOfTheDragonHandler)
-// 	r.HandleFunc("/IntTheLordOfTheRingsTheRingsOfPower", IntTheLordOfTheRingsTheRingsOfPowerHandler)
-// 	r.HandleFunc("/IntAndor", IntAndorHandler)
-// 	r.HandleFunc("/IntNightSky", IntNightSkyHandler)
-// 	r.HandleFunc("/IntTalesOfTheJedi", IntTalesOfTheJediHandler)
-
-// 	r.HandleFunc("/TVUpdate", TVUpdateHandler)
-// 	r.HandleFunc("/playMediaReact", playMediaReactHandler)
-
-// 	s.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir(""))))
-// 	r.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("/media/"))))
-// 	http.ListenAndServe(":8888", handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}),
-// 		handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"}),
-// 		handlers.AllowedOrigins([]string{"*"}))(r))
-// }
+func IntTalesOfTheJediHandler(c echo.Context) error {
+	log.Println("TalesOfTheJedi started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var TalesOfTheJediMedia []map[string]string
+	b1 := bson.M{"catagory": "TalesOfTheJedi", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&TalesOfTheJediMedia)
+	if errG != nil {
+		log.Println("TalesOfTheJedi db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, TalesOfTheJediMedia)
+}

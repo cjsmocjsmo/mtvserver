@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 
-	"github.com/globalsign/mgo"
+	// "github.com/globalsign/mgo"
 
 	// "log"
 	"os"
@@ -15,17 +15,6 @@ import (
 	"strings"
 	"time"
 )
-
-//MovDBcon is exported for all our db connection objects
-func MovDBcon() *mgo.Session {
-	log.Println("Starting DB session")
-	s, err := mgo.Dial(os.Getenv("MTV_MONGODB_ADDRESS"))
-	if err != nil {
-		log.Println("this is dial err")
-		panic(err)
-	}
-	return s
-}
 
 func isDirEmpty(name string) (bool, error) {
 	log.Printf("\n this is name from isDirEmpty %s \n", name)
@@ -56,7 +45,7 @@ func ProcessMovs(pAth string) {
 	log.Printf("\n\n THIS IS MOVPICPATH %s", movpicPath)
 	var MovI MOVI
 	MovI = GetMovieInfo(pAth, movpicPath, httppicPath)
-	ses := MovDBcon()
+	ses := DBcon()
 	defer ses.Close()
 	MTc := ses.DB("moviegobs").C("moviegobs")
 	err := MTc.Insert(&MovI)
@@ -73,7 +62,7 @@ func ProcessMovs(pAth string) {
 // 	var TVShowI tVShowInfoS
 // 	TVShowI = getTvShowInfo(pAth, tvpicpath)
 
-// 	ses := MovDBcon()
+// 	ses := DBcon()
 // 	defer ses.Close()
 // 	MTc := ses.DB("moviegobs").C("tvshows")
 // 	err := MTc.Insert(&TVShowI)
@@ -203,7 +192,7 @@ func MOVSetup() {
 
 	log.Printf("setup function has started at: %s", startTime2)
 	//Connect to the DB
-	sess := MovDBcon()
+	sess := DBcon()
 	err := sess.DB("moviegobs").DropDatabase()
 	if err != nil {
 		log.Println(err)
