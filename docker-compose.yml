@@ -2,8 +2,8 @@ version: "3.3"
 
 services:
   mtvdb:
-    # image: andresvidal/rpi3-mongodb3
-    image: mongo:4.4.0
+    image: andresvidal/rpi3-mongodb3
+    # image: mongo:4.4.0
     networks:
       - mtv
     ports:
