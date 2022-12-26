@@ -55,6 +55,12 @@ func main() {
 	e.GET("/TomCruize", IntTomCruizeHandler)
 	e.GET("/XMen", IntXMenHandler)
 	e.GET("/Documentary", IntDocumentaryHandler)
+	e.GET("/TheRock", IntTheRockHandler)
+	e.GET("/NicolasCage", IntNicolasCageHandler)
+	e.GET("/JamesBond", IntJamesBondHandler)
+	e.GET("/Transformers", IntTransformersHandler)
+
+	e.GET("/STTV", IntSTTVHandler)
 	
 	e.Logger.Fatal(e.Start(":8888"))
 }

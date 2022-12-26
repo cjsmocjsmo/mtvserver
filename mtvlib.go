@@ -21,7 +21,7 @@ package main
 
 import (
 	// "encoding/json"
-	// "fmt"
+	"fmt"
 	// "io/ioutil"
 	"log"
 	"net/http"
@@ -545,33 +545,34 @@ func IntTransformersHandler(c echo.Context) error {
 // 	return c.JSON(http.StatusOK, Abody)
 // }
 
-// func IntSTTVHandler(c echo.Context) error {
-// 	log.Println("STTVHandler started")
-// 	u, err := url.Parse(r.URL.String())
-// 	if err != nil {
-// 		log.Println("STTVHandler url parse error")
-// 		log.Println(err)
-// 	}
-// 	m, eff := url.ParseQuery(u.RawQuery)
-// 	if eff != nil {
-// 		log.Println("usrl parsequery error")
-// 		log.Println(eff)
-// 	}
-// 	s1 := m["season"][0]
-// 	ses := DBcon()
-// 	defer ses.Close()
-// 	MTyc := ses.DB("tvgobs").C("tvgobs")
-// 	var STTVMedia []map[string]string
-// 	b1 := bson.M{"catagory": "STTV", "season": s1}
-// 	b2 := bson.M{"_id": 0}
-// 	fmt.Printf("this is b1 %s", b1)
-// 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&STTVMedia)
-// 	if errG != nil {
-// 		log.Println("STTVHandler db call error")
-// 		log.Println(errG)
-// 	}
-// 	return c.JSON(http.StatusOK, STTVMedia)
-// }
+func IntSTTVHandler(c echo.Context) error {
+	log.Println("STTVHandler started")
+	// u, err := url.Parse(r.URL.String())
+	// if err != nil {
+	// 	log.Println("STTVHandler url parse error")
+	// 	log.Println(err)
+	// }
+	// m, eff := url.ParseQuery(u.RawQuery)
+	// if eff != nil {
+	// 	log.Println("usrl parsequery error")
+	// 	log.Println(eff)
+	// }
+	// s1 := m["season"][0]
+	s1 := c.QueryParam("season")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var STTVMedia []map[string]string
+	b1 := bson.M{"catagory": "STTV", "season": s1}
+	b2 := bson.M{"_id": 0}
+	fmt.Printf("this is b1 %s", b1)
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&STTVMedia)
+	if errG != nil {
+		log.Println("STTVHandler db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, STTVMedia)
+}
 
 // func IntTNGHandler(c echo.Context) error {
 // 	log.Println("TNGHandler started")
