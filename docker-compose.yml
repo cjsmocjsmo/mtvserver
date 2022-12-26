@@ -1,0 +1,71 @@
+version: "3.3"
+
+services:
+  mtvdb:
+    image: andresvidal/rpi3-mongodb3
+    # image: mongo:4.4.0
+    networks:
+      - mtv
+    ports:
+      - 27017:27017
+
+  mtv:
+    image: mtv:0.1.0
+    build: .
+    environment:
+      - MTV_MONGODB_ADDRESS=mongodb://db:27017/mtv
+      - MTV_LOG_BASE_PATH=/root/logs
+      - MTV_MOVIES_PATH=/root/fsData/Movies
+      - MTV_TVSHOWS_PATH=/root/fsData/TVShows
+      - MTV_NO_ART_PIC_PATH=./static/images/animals.jpg
+      - MTV_THUMBNAIL_PIC_PATH=/static
+      - MTV_SERVER_PORT=8888
+      - MTV_SERVER_ADDRESS=http://192.168.0.94
+      - MTV_OMXPLAYER_ADDRESS=http://192.168.0.94:8181/OmxplayerPlayMedia
+      - MTV_OMXPLAYER_ADDRESS_REACT=http://192.168.0.94:8181/OmxplayerPlayMediaReact
+
+      # - MONGO_INITDB_ROOT_USERNAME=root
+      # - MONGO_INITDB_ROOT_PASSWORD=example
+
+      # - MTV_MONGODB_THUMB_ADDRESS=mongodb://db:27017/movbsthumb
+      # - MTV_TEMPLATE_ADDRESS=./static/templates/mtv.template
+      # - MTV_HARDRIVE_POSTERS_PATH=/root/fsData/Posters2
+      # - MTV_THUMB_BASE_PATH=./static/images/thumbnails
+
+    networks:
+      - mtv
+    ports:
+      - 8888:8888
+    volumes:
+      - mtvvol:/root/fsData/
+      - mtvpicvol:/root/static/
+      - mtvlogvol:/root/logs/
+    depends_on:
+      - mtvdb
+
+networks:
+  mtv:
+
+volumes:
+  mtvvol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /media/pi/PiTB/media
+      o: bind
+
+  mtvpicvol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/pi/Thumbnails
+      o: bind
+
+  mtvlogvol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/pi/LOGFILES
+      o: bind
+
+
