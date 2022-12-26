@@ -86,7 +86,7 @@ func main() {
 	e.GET("/ForAllManKind", IntForAllManKindHandler)
 	e.GET("/AlienWorlds", IntAlienWorldsHandler)
 	e.GET("/WandaVision", IntWandaVisionHandler)
-	e.GET("/FalconWinterSoldier", IntFalconWInterSoldierHandler)
+	e.GET("/FalconWinterSoldier", IntFalconWinterSoldierHandler)
 	e.GET("/Loki", IntLokiHandler)
 	e.GET("/WhatIf", IntWhatIfHandler)
 	e.GET("/YTheLastMan", IntYTheLastManHandler)

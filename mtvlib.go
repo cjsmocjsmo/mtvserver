@@ -788,7 +788,7 @@ func IntWandaVisionHandler(c echo.Context) error {
 	return c.JSON(http.StatusOK, wandavisionMedia)
 }
 
-func IntFalconWInterSoldierHandler(c echo.Context) error {
+func IntFalconWinterSoldierHandler(c echo.Context) error {
 	log.Println("Starting IntFalconWInterSoldier")
 	log.Println(" started")
 	s1 := c.QueryParam("season")
