@@ -6,7 +6,6 @@ WORKDIR /go/src/mtv
 COPY movgolib.go .
 COPY mtvlib.go .
 COPY mtvserver.go .
-COPY mtvsetup.go .
 COPY thumbgolib.go .
 COPY tvgolib.go .
 COPY typeslib.go .
