@@ -3,18 +3,13 @@ package main
 import (
 	"fmt"
 	//because I want it
+	"github.com/disintegration/imaging"
+	"github.com/globalsign/mgo/bson"
 	_ "image/jpeg"
 	_ "image/png"
 	"log"
-
-	"github.com/disintegration/imaging"
-	"github.com/globalsign/mgo/bson"
-
-	// "math/rand"
 	"os"
 	"path"
-	// "strconv"
-	// "time"
 )
 
 func myPathSplit(myPath string) (DirPath string, BaseNAme string, MOvName string, Ext string) {

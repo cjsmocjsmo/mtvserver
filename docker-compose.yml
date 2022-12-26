@@ -10,7 +10,7 @@ services:
       - 27017:27017
 
   mtv:
-    image: mtv:0.1.4
+    image: mtv:0.1.5
     build: .
     environment:
       - MTV_MONGODB_ADDRESS=mongodb://db:27017/mtv
@@ -24,10 +24,10 @@ services:
       - MTV_OMXPLAYER_ADDRESS=http://192.168.0.94:8181/OmxplayerPlayMedia
       - MTV_OMXPLAYER_ADDRESS_REACT=http://192.168.0.94:8181/OmxplayerPlayMediaReact
 
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=example
+      # - MONGO_INITDB_ROOT_USERNAME=root
+      # - MONGO_INITDB_ROOT_PASSWORD=example
 
-      - MTV_MONGODB_THUMB_ADDRESS=mongodb://db:27017/movbsthumb
+      # - MTV_MONGODB_THUMB_ADDRESS=mongodb://db:27017/movbsthumb
       # - MTV_TEMPLATE_ADDRESS=./static/templates/mtv.template
       # - MTV_HARDRIVE_POSTERS_PATH=/root/fsData/Posters2
       # - MTV_THUMB_BASE_PATH=./static/images/thumbnails

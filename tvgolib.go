@@ -83,7 +83,6 @@ func TVShowsDirVisit(pAth string, f os.FileInfo, err error) error {
 
 //TVSetUp is exported to main
 func TVSetUp() {
-	// setupLogging()
 	//Start the timer
 	startTime := time.Now().Unix()
 	fmt.Printf("setup function has started at: %T", startTime)
@@ -97,7 +96,6 @@ func TVSetUp() {
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	os.Setenv("MTV_TVGO_SETUP", "0")
 	fmt.Println(startTime)
 	stopTime := time.Now().Unix()
@@ -116,7 +114,6 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		_, filename := path.Split(apath)
 		fspath := apath[21:]
 		boo := len(filename) - 4
-		// TvSI.ID = bson.NewObjectId()
 		TvSI.FilePath = apath
 		TvSI.MediaID = UUID()
 		TvSI.Genre = "TVShows"

@@ -4,10 +4,6 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-
-	// "github.com/globalsign/mgo"
-
-	// "log"
 	"os"
 	"path"
 	"path/filepath"
@@ -38,9 +34,6 @@ func isDirEmpty(name string) (bool, error) {
 //ProcessMovs is needed in update
 func ProcessMovs(pAth string) {
 	log.Println("Process_Movs has started")
-	// var movpicPath string
-	// var httppicPath string
-
 	movpicPath, httppicPath := FindPicPaths(pAth, os.Getenv("MOVIEGOBS_NO_ART_PIC_PATH"))
 	log.Printf("\n\n THIS IS MOVPICPATH %s", movpicPath)
 	var MovI MOVI
