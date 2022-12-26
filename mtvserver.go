@@ -22,7 +22,7 @@ import (
 func main() {
 	// mtv_logging()
 	MOVSetup()
-	// TVSetUp()
+	TVSetUp()
 	
 
 	e := echo.New()
