@@ -796,14 +796,14 @@ func IntFalconWinterSoldierHandler(c echo.Context) error {
 	ses := DBcon()
 	defer ses.Close()
 	MTyc := ses.DB("tvgobs").C("tvgobs")
-	var lokiMedia []map[string]string
-	b1 := bson.M{"catagory": "FalconWInterSoldier", "season": s1}
+	var falconMedia []map[string]string
+	b1 := bson.M{"catagory": "FalconWinterSoldier", "season": s1}
 	b2 := bson.M{"_id": 0}
-	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&lokiMedia)
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&falconMedia)
 	if errG != nil {
 		log.Println(errG)
 	}
-	return c.JSON(http.StatusOK, lokiMedia)
+	return c.JSON(http.StatusOK, falconMedia)
 }
 
 func IntLokiHandler(c echo.Context) error {
