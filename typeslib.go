@@ -37,3 +37,4 @@ type ThumbInFo struct {
 	ThumbID       string        `bson:"thumbid"`
 	HTTPThumbPath string        `bson:"httpthumbpath"`
 }
+

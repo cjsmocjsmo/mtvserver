@@ -2,10 +2,13 @@ package main
 
 import (
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"log"
 	"net/http"
 	"os"
 )
+
+
 
 func mtv_logging() {
 	logfile := os.Getenv("MTV_LOG_BASE_PATH") + "/MTV.log"
@@ -18,12 +21,22 @@ func mtv_logging() {
 	log.Println("MTV logging started")
 }
 
+
+
 func main() {
+	
 	mtv_logging()
 	MOVSetup()
 	TVSetUp()
 
 	e := echo.New()
+	e.Use(middleware.CORS())
+	// e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+	// 	AllowOrigins: []string{"https://labstack.com", "https://labstack.net"},
+	// 	AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	//   }))
+	
+	  
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, mtv is up and running")
 	})
