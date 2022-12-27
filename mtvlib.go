@@ -791,13 +791,13 @@ func IntWandaVisionHandler(c echo.Context) error {
 func IntFalconWinterSoldierHandler(c echo.Context) error {
 	log.Println("Starting IntFalconWInterSoldier")
 	log.Println(" started")
-	s1 := c.QueryParam("season")
-	log.Println(s1)
+	// s1 := c.QueryParam("season")
+	// log.Println(s1)
 	ses := DBcon()
 	defer ses.Close()
 	MTyc := ses.DB("tvgobs").C("tvgobs")
 	var falconMedia []map[string]string
-	b1 := bson.M{"catagory": "FalconWinterSoldier", "season": s1}
+	b1 := bson.M{"catagory": "FalconWinterSoldier", "season": "01"}
 	b2 := bson.M{"_id": 0}
 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&falconMedia)
 	if errG != nil {

@@ -35,6 +35,6 @@ RUN \
   chmod -R +rwx ./logs/mtvServer.log && \
   chmod -R +rwx ./logs/mtvTV.log && \
   chmod -R +rwx ./logs/mtvMOV.log
-  
+
+STOPSIGNAL SIGINT
 CMD ["./main"]
-STOPSIGNAL SIGInt

@@ -349,7 +349,7 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		TvSI.Title = filename[19:boo]
 		TvSI.Series = "WandaVision"
 
-	case strings.Contains(apath, "FalconWInterSoldier"):
+	case strings.Contains(apath, "FalconWinterSoldier"):
 		_, filename := path.Split(apath)
 		fspath := apath[21:]
 		boo := len(filename) - 4
@@ -359,11 +359,11 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		TvSI.Genre = "TVShows"
 		TvSI.TVShowPicPath = tvshowpicPath
 		TvSI.TvFSPath = fspath
-		TvSI.Catagory = "FalconWInterSoldier"
+		TvSI.Catagory = "FalconWinterSoldier"
 		TvSI.Season = filename[35:37]
 		TvSI.Episode = filename[38:40]
 		TvSI.Title = filename[40:boo]
-		TvSI.Series = "FalconWInterSoldier"
+		TvSI.Series = "FalconWinterSoldier"
 
 	case strings.Contains(apath, "Loki"):
 		_, filename := path.Split(apath)
