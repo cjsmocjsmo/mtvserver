@@ -1,6 +1,5 @@
-cd /home/pi/mtvserver;
-sudo rm -rf Thumbnails;
-mkdir Thumbnails;
-cd mtserver;
+
+sudo rm -rf ../Thumbnails;
+mkdir ../Thumbnails;
 docker-compose down;
 docker image ls;
