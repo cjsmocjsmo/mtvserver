@@ -110,7 +110,7 @@ func TVSetUp() {
 func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 	// startLogging()
 	switch {
-	case strings.Contains(apath, "TVShows/TNG"):
+	case strings.Contains(apath, "StarTrek/TNG"):
 		_, filename := path.Split(apath)
 		fspath := apath[21:]
 		boo := len(filename) - 4
