@@ -1,5 +1,8 @@
 # FROM arm32v7/golang:1.12.13 AS builder
 FROM golang:latest AS builder
+
+RUN apt-get install -y libaom-dev
+
 RUN mkdir /go/src/mtv
 WORKDIR /go/src/mtv
 
