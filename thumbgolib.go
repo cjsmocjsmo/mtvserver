@@ -45,9 +45,12 @@ func CreateMoviesThumbnail(p string) (ThumbINFO ThumbInFo) {
 	// BP := "/" + url.QueryEscape(basepath)
 	// thumbpathtwo := MSA + ":" + MSP + MTPP + BP
 	// thumbpathone := "./static/" + basepath
-	var BP string = "/" + basepath
+	var BP string = "/" + movname + ".avif"
 	var thumbpathtwo string = MSA + ":" + MSP + MTPP + BP
-	var thumbpathone string = "./static/" + basepath
+	var thumbpathone string = "./static/" + movname + ".avif"
+	// var BP string = "/" + basepath
+	// var thumbpathtwo string = MSA + ":" + MSP + MTPP + BP
+	// var thumbpathone string = "./static/" + basepath
 
 	// ThumbINFO.ID = bson.NewObjectId()
 	ThumbINFO.MovName = movname
