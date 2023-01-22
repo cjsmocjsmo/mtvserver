@@ -1,14 +1,5 @@
 # FROM arm32v7/golang:1.12.13 AS builder
-FROM debian:bookworm AS builder
-
-RUN \
-  apt-get -y update && \
-  apt-get -y dist-upgrade && \
-  apt-get install libaom-dev golang && \ 
-  apt-get -y autoclean && \
-  apt-get -y autoremove
-
-RUN apt-get install -y libaom-dev
+FROM golang:latest AS builder
 
 RUN mkdir /go/src/mtv
 WORKDIR /go/src/mtv

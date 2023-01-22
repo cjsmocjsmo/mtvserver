@@ -3,10 +3,8 @@ package main
 import (
 	"fmt"
 	//because I want it
-	"github.com/Kagami/go-avif"
 	"github.com/disintegration/imaging"
 	"github.com/globalsign/mgo/bson"
-	"image"
 	_ "image/jpeg"
 	_ "image/png"
 	"log"
@@ -47,13 +45,12 @@ func CreateMoviesThumbnail(p string) (ThumbINFO ThumbInFo) {
 	// BP := "/" + url.QueryEscape(basepath)
 	// thumbpathtwo := MSA + ":" + MSP + MTPP + BP
 	// thumbpathone := "./static/" + basepath
-	// var BP string = "/" + basepath
-	var BP2 string = "/" + movname + ".avif"
-	// var thumbpathtwo string = MSA + ":" + MSP + MTPP + BP
+	var BP string = "/" + basepath
+	
+	var thumbpathtwo string = MSA + ":" + MSP + MTPP + BP
 	var thumbpathone string = "./static/" + basepath
 
-	var thumbpathfour string = MSA + ":" + MSP + MTPP + BP2
-	var thumbpaththree string = "./static/" + movname + ".avif"
+	
 	// var BP string = "/" + basepath
 	// var thumbpathtwo string = MSA + ":" + MSP + MTPP + BP
 	// var thumbpathone string = "./static/" + basepath
@@ -62,8 +59,8 @@ func CreateMoviesThumbnail(p string) (ThumbINFO ThumbInFo) {
 	ThumbINFO.MovName = movname
 	ThumbINFO.BasePath = basepath
 	ThumbINFO.DirPATH = dirpath
-	ThumbINFO.HTTPThumbPath = thumbpathfour
-	ThumbINFO.ThumbPath = thumbpaththree
+	ThumbINFO.HTTPThumbPath = thumbpathtwo
+	ThumbINFO.ThumbPath = thumbpathone
 	ThumbINFO.ThumbID = UUID()
 
 	if ext == ".txt" {
@@ -87,25 +84,11 @@ func CreateMoviesThumbnail(p string) (ThumbINFO ThumbInFo) {
 				fmt.Println(err)
 			}
 
-			pic2, err := os.Open(thumbpathone)
-			if err != nil {
-				log.Printf("\n this is file Open error jpgthumb %v \n", p)
-			}
+			
+			
 
-			img, _, err := image.Decode(pic2)
-			if err != nil {
-				log.Fatalf("Can't decode source file: %v", err)
-			}
-
-			dst, err := os.Create(thumbpaththree)
-			if err != nil {
-				log.Fatalf("Can't create destination file: %v", err)
-			}
-
-			err = avif.Encode(dst, img, nil)
-			if err != nil {
-				log.Fatalf("Can't encode source image: %v", err)
-			}
+			
+			
 
 		} else {
 			log.Printf("file %s stat error: %v", thumbpathone, err)
