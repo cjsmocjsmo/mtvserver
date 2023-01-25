@@ -836,12 +836,12 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		TvSI.TVShowPicPath = tvshowpicPath
 		TvSI.TvFSPath = fspath
 		TvSI.Catagory = "LastOfUs"
-		TvSI.Season = filename[15:17]
-		TvSI.Episode = filename[18:20]
-		TvSI.Title = filename[20:boo]
+		TvSI.Season = filename[16:18]
+		TvSI.Episode = filename[19:21]
+		TvSI.Title = filename[21:boo]
 		TvSI.Series = "LastOfUs"
 		log.Println("Starting LastOfUs")
-		fmt.Println(filename[20:boo])
+		fmt.Println(filename[21:boo])
 	
 	}
 	return
