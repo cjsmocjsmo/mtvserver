@@ -812,7 +812,6 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		_, filename := path.Split(apath)
 		fspath := apath[21:]
 		boo := len(filename) - 4
-		// TvSI.ID = bson.NewObjectId()
 		TvSI.FilePath = apath
 		TvSI.MediaID = UUID()
 		TvSI.Genre = "TVShows"
@@ -825,7 +824,25 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		TvSI.Series = "TalesOfTheJedi"
 		log.Println("Starting TalesOfTheJedi")
 		fmt.Println(filename[34:boo])
-	}
 
+			// /media/pi/PiTB/media/ TVShows/LastOfUs/s1/The Last Of Us S01E01 Glorious Purpose.mp4
+	case strings.Contains(apath, "LastOfUs"):
+		_, filename := path.Split(apath)
+		fspath := apath[21:]
+		boo := len(filename) - 4
+		TvSI.FilePath = apath
+		TvSI.MediaID = UUID()
+		TvSI.Genre = "TVShows"
+		TvSI.TVShowPicPath = tvshowpicPath
+		TvSI.TvFSPath = fspath
+		TvSI.Catagory = "LastOfUs"
+		TvSI.Season = filename[15:17]
+		TvSI.Episode = filename[18:20]
+		TvSI.Title = filename[34:boo]
+		TvSI.Series = "LastOfUs"
+		log.Println("Starting LastOfUs")
+		fmt.Println(filename[34:boo])
+	
+	}
 	return
 }

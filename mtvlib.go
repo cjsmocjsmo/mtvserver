@@ -1251,3 +1251,19 @@ func IntTalesOfTheJediHandler(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, TalesOfTheJediMedia)
 }
+
+func IntTheLastOfUsHandler(c echo.Context) error {
+	log.Println("TheLastOfUs started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var TheLastOfUsMedia []map[string]string
+	b1 := bson.M{"catagory": "TheLastOfUs", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&TheLastOfUsMedia)
+	if errG != nil {
+		log.Println("TheLastOfUs db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, TheLastOfUsMedia)
+}
