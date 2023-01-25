@@ -95,7 +95,7 @@ func main() {
 	e.GET("/NightSky", IntNightSkyHandler)
 	e.GET("/PrehistoricPlanet", IntPrehistoricPlanetHandler)
 
-	e.GET("/LastOfUs", IntTheLastOfUsHandler)
+	e.GET("/TheLastOfUs", IntTheLastOfUsHandler)
 
 	e.GET("/Mandalorian", IntMandalorianHandler)
 	e.GET("/BookOfBobaFett", IntBookOfBobaFettHandler)
