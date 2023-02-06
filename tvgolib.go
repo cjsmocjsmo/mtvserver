@@ -10,7 +10,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
 	// "github.com/globalsign/mgo"
 )
 
@@ -825,8 +824,8 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		log.Println("Starting TalesOfTheJedi")
 		fmt.Println(filename[34:boo])
 
-			// /media/pi/PiTB/media/ TVShows/TheLastOfUs/s1/The Last Of Us S01E01 Glorious Purpose.mp4
-	case strings.Contains(apath, "TheLastOfUs"):
+		// /media/pi/PiTB/media/ TVShows/TheLastOfUs/s1/The Last Of Us S01E01 Glorious Purpose.mp4
+	case strings.Contains(apath, "HFord1923"):
 		_, filename := path.Split(apath)
 		fspath := apath[21:]
 		boo := len(filename) - 4
@@ -835,14 +834,32 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		TvSI.Genre = "TVShows"
 		TvSI.TVShowPicPath = tvshowpicPath
 		TvSI.TvFSPath = fspath
-		TvSI.Catagory = "TheLastOfUs"
+		TvSI.Catagory = "HFord1923"
 		TvSI.Season = filename[16:18]
 		TvSI.Episode = filename[19:21]
 		TvSI.Title = filename[21:boo]
-		TvSI.Series = "TheLastOfUs"
-		log.Println("Starting TheLastOfUs")
+		TvSI.Series = "HFord1923"
+		log.Println("Starting HFord1923")
 		fmt.Println(filename[21:boo])
-	
+
+	// /media/pi/PiTB/media/ TVShows/HFord1923/s1/1923 S01E01 Glorious Purpose.mp4
+	case strings.Contains(apath, "HFord1923"):
+		_, filename := path.Split(apath)
+		fspath := apath[21:]
+		boo := len(filename) - 4
+		TvSI.FilePath = apath
+		TvSI.MediaID = UUID()
+		TvSI.Genre = "TVShows"
+		TvSI.TVShowPicPath = tvshowpicPath
+		TvSI.TvFSPath = fspath
+		TvSI.Catagory = "HFord1923"
+		TvSI.Season = filename[6:8]
+		TvSI.Episode = filename[9:11]
+		TvSI.Title = filename[11:boo]
+		TvSI.Series = "HFord1923"
+		log.Println("Starting HFord1923")
+		fmt.Println(filename[11:boo])
+
 	}
 	return
 }

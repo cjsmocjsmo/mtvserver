@@ -1267,3 +1267,19 @@ func IntTheLastOfUsHandler(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, TheLastOfUsMedia)
 }
+
+func IntHFord1923Handler(c echo.Context) error {
+	log.Println("HFord1923 started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var HFord1923Media []map[string]string
+	b1 := bson.M{"catagory": "HFord1923", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&HFord1923Media)
+	if errG != nil {
+		log.Println("HFord1923 db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, HFord1923Media)
+}
