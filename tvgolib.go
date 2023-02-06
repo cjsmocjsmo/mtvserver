@@ -103,7 +103,7 @@ func TVSetUp() {
 	fmt.Println(etime)
 	fmt.Println("SETUP IS COMPLETE")
 
-	return
+	// return
 }
 
 func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {

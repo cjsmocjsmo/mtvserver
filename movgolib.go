@@ -36,8 +36,8 @@ func ProcessMovs(pAth string) {
 	log.Println("Process_Movs has started")
 	movpicPath, httppicPath := FindPicPaths(pAth, os.Getenv("MOVIEGOBS_NO_ART_PIC_PATH"))
 	log.Printf("\n\n THIS IS MOVPICPATH %s", movpicPath)
-	var MovI MOVI
-	MovI = GetMovieInfo(pAth, movpicPath, httppicPath)
+	// var MovI MOVI
+	MovI := GetMovieInfo(pAth, movpicPath, httppicPath)
 	ses := DBcon()
 	defer ses.Close()
 	MTc := ses.DB("moviegobs").C("moviegobs")
@@ -224,7 +224,7 @@ func MOVSetup() {
 	etime := stopTime - starttime
 	log.Println(etime)
 	log.Println("SETUP IS COMPLETE")
-	return
+	// return
 }
 
 func getmovName(movname string) (movName string) {
