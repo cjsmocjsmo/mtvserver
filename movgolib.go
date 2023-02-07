@@ -177,7 +177,7 @@ func picUpdateStatus() (updateStat bool) {
 // }
 
 //MOVSetup is exported to main
-func MOVSetup() {
+func MOVSetup() string {
 	//Start the timer
 	starttime := time.Now().Unix()
 	startTime2 := strconv.FormatInt(starttime, 10)
@@ -224,7 +224,7 @@ func MOVSetup() {
 	etime := stopTime - starttime
 	log.Println(etime)
 	log.Println("SETUP IS COMPLETE")
-	return
+	return "Completed"
 }
 
 func getmovName(movname string) (movName string) {

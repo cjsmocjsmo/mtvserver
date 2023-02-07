@@ -81,7 +81,7 @@ func TVShowsDirVisit(pAth string, f os.FileInfo, err error) error {
 }
 
 //TVSetUp is exported to main
-func TVSetUp() {
+func TVSetUp() string {
 	//Start the timer
 	startTime := time.Now().Unix()
 	fmt.Printf("setup function has started at: %T", startTime)
@@ -103,7 +103,7 @@ func TVSetUp() {
 	fmt.Println(etime)
 	fmt.Println("SETUP IS COMPLETE")
 
-	// return
+	return "Complete"
 }
 
 func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
