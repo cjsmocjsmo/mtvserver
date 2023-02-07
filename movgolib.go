@@ -224,7 +224,7 @@ func MOVSetup() {
 	etime := stopTime - starttime
 	log.Println(etime)
 	log.Println("SETUP IS COMPLETE")
-	// return
+	return
 }
 
 func getmovName(movname string) (movName string) {

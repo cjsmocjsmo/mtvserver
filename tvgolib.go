@@ -825,7 +825,7 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		fmt.Println(filename[34:boo])
 
 		// /media/pi/PiTB/media/ TVShows/TheLastOfUs/s1/The Last Of Us S01E01 Glorious Purpose.mp4
-	case strings.Contains(apath, "HFord1923"):
+	case strings.Contains(apath, "TheLastOfUs"):
 		_, filename := path.Split(apath)
 		fspath := apath[21:]
 		boo := len(filename) - 4
@@ -834,12 +834,12 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		TvSI.Genre = "TVShows"
 		TvSI.TVShowPicPath = tvshowpicPath
 		TvSI.TvFSPath = fspath
-		TvSI.Catagory = "HFord1923"
+		TvSI.Catagory = "TheLastOfUs"
 		TvSI.Season = filename[16:18]
 		TvSI.Episode = filename[19:21]
 		TvSI.Title = filename[21:boo]
-		TvSI.Series = "HFord1923"
-		log.Println("Starting HFord1923")
+		TvSI.Series = "TheLastOfUs"
+		log.Println("Starting TheLastOfUs")
 		fmt.Println(filename[21:boo])
 
 	// /media/pi/PiTB/media/ TVShows/HFord1923/s1/1923 S01E01 Glorious Purpose.mp4
