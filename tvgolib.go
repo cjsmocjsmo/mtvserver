@@ -842,7 +842,7 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		log.Println("Starting TheLastOfUs")
 		fmt.Println(filename[21:boo])
 
-	// /media/pi/PiTB/media/ TVShows/HFord1923/s1/1923 S01E01 Glorious Purpose.mp4
+	// /media/pi/PiTB/media/ TVShows/HFord1923/s1/HFord1923 S01E01 Glorious Purpose.mp4
 	case strings.Contains(apath, "HFord1923"):
 		_, filename := path.Split(apath)
 		fspath := apath[21:]
@@ -853,12 +853,12 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		TvSI.TVShowPicPath = tvshowpicPath
 		TvSI.TvFSPath = fspath
 		TvSI.Catagory = "HFord1923"
-		TvSI.Season = filename[6:8]
-		TvSI.Episode = filename[9:11]
-		TvSI.Title = filename[11:boo]
+		TvSI.Season = filename[11:13]
+		TvSI.Episode = filename[14:16]
+		TvSI.Title = filename[16:boo]
 		TvSI.Series = "HFord1923"
 		log.Println("Starting HFord1923")
-		fmt.Println(filename[11:boo])
+		fmt.Println(filename[16:boo])
 
 	}
 	return
