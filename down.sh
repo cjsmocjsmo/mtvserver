@@ -1,3 +1,4 @@
+#!/bin/sh
 
 sudo rm -rf ../Thumbnails;
 mkdir ../Thumbnails;
