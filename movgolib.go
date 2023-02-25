@@ -328,6 +328,13 @@ func GetMovieInfo(apath string, movpicInfo string, httppicInfo string) (MovInfo 
 		MovInfo.Catagory = "JamesBond"
 	case strings.Contains(apath, "Transformers"):
 		MovInfo.Catagory = "Transformers"
+
+	case strings.Contains(apath, "TinkerBell"):
+		MovInfo.Catagory = "TinkerBell"
+	case strings.Contains(apath, "CharlieBrown"):
+		MovInfo.Catagory = "CharlieBrown"
+	case strings.Contains(apath, "Minions"):
+		MovInfo.Catagory = "Minions"
 	}
 	return
 }

@@ -89,6 +89,73 @@ func IntComedyHandler(c echo.Context) error {
 	return c.JSON(http.StatusOK, ComedyMedia)
 }
 
+func IntTinkerBell(c echo.Context) error {
+	log.Println("IntTinkerBell started")
+	ses := DBcon()
+	defer ses.Close()
+	MTc := ses.DB("moviegobs").C("moviegobs")
+	var TinkerBellMedia []map[string]string
+	b1 := bson.M{"catagory": "TinkerBell"}
+	b2 := bson.M{"_id": 0}
+	err := MTc.Find(b1).Select(b2).All(&TinkerBellMedia)
+	if err != nil {
+		log.Println("TinkerBell db call error")
+		log.Println(err)
+	}
+	return c.JSON(http.StatusOK, TinkerBellMedia)
+}
+
+func IntCharlieBrown(c echo.Context) error {
+	log.Println("IntCharlieBrown started")
+	ses := DBcon()
+	defer ses.Close()
+	MTc := ses.DB("moviegobs").C("moviegobs")
+	var CharlieBrownMedia []map[string]string
+	b1 := bson.M{"catagory": "CharlieBrown"}
+	b2 := bson.M{"_id": 0}
+	err := MTc.Find(b1).Select(b2).All(&CharlieBrownMedia)
+	if err != nil {
+		log.Println("CharlieBrown db call error")
+		log.Println(err)
+	}
+	return c.JSON(http.StatusOK, CharlieBrownMedia)
+}
+
+func IntMinions(c echo.Context) error {
+	log.Println("IntMinions started")
+	ses := DBcon()
+	defer ses.Close()
+	MTc := ses.DB("moviegobs").C("moviegobs")
+	var MinionsMedia []map[string]string
+	b1 := bson.M{"catagory": "Minions"}
+	b2 := bson.M{"_id": 0}
+	err := MTc.Find(b1).Select(b2).All(&MinionsMedia)
+	if err != nil {
+		log.Println("Minions db call error")
+		log.Println(err)
+	}
+	return c.JSON(http.StatusOK, MinionsMedia)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 func IntDramaHandler(c echo.Context) error {
 	log.Println("IntDramaHandler started")
 	ses := DBcon()
