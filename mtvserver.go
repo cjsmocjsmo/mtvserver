@@ -43,6 +43,8 @@ func main() {
 	e.GET("/TinkerBell", IntTinkerBell)
 	e.GET("/CharlieBrown", IntCharlieBrown)
 	e.GET("/Minions", IntMinions)
+	e.GET("/Buzz", IntBuzz)
+	e.GET("/ClassicCartoons", IntClassicCartoons)
 
 	e.GET("/Comedy", IntComedyHandler)
 	e.GET("/Drama", IntDramaHandler)
