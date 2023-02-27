@@ -165,17 +165,6 @@ func picUpdateStatus() (updateStat bool) {
 	return
 }
 
-// func setupLogging() {
-// 	logfile := os.Getenv("MTV_LOG_BASE_PATH") + "/moviegobsMOV.log"
-// 	// If the file doesn't exist, create it or append to the file
-// 	file, err := os.OpenFile(logfile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	log.SetOutput(file)
-// 	log.Println("Mov logging started")
-// }
-
 //MOVSetup is exported to main
 func MOVSetup() string {
 	//Start the timer
