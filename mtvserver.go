@@ -27,10 +27,6 @@ func main() {
 
 	e := echo.New()
 	e.Use(middleware.CORS())
-	// e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-	// 	AllowOrigins: []string{"https://labstack.com", "https://labstack.net"},
-	// 	AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
-	//   }))
 
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, mtv is up and running")

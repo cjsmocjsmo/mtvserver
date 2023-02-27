@@ -175,40 +175,6 @@ func IntClassicCartoons(c echo.Context) error {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 func IntDramaHandler(c echo.Context) error {
 	log.Println("IntDramaHandler started")
 	ses := DBcon()
