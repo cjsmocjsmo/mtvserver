@@ -153,20 +153,20 @@ func IntBuzz(c echo.Context) error {
 	return c.JSON(http.StatusOK, BuzzMedia)
 }
 
-func IntClassicCartoons(c echo.Context) error {
-	log.Println("IntClassicCartoons started")
+func IntOldies(c echo.Context) error {
+	log.Println("IntOldies started")
 	ses := DBcon()
 	defer ses.Close()
 	MTc := ses.DB("moviegobs").C("moviegobs")
-	var ClassicCartoonsMedia []map[string]string
-	b1 := bson.M{"catagory": "ClassicCartoons"}
+	var OldiesMedia []map[string]string
+	b1 := bson.M{"catagory": "Oldies"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&ClassicCartoonsMedia)
+	err := MTc.Find(b1).Select(b2).All(&OldiesMedia)
 	if err != nil {
-		log.Println("ClassicCartoons db call error")
+		log.Println("Oldies db call error")
 		log.Println(err)
 	}
-	return c.JSON(http.StatusOK, ClassicCartoonsMedia)
+	return c.JSON(http.StatusOK, OldiesMedia)
 }
 
 
