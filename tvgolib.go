@@ -80,7 +80,7 @@ func TVShowsDirVisit(pAth string, f os.FileInfo, err error) error {
 	return nil
 }
 
-//TVSetUp is exported to main
+// TVSetUp is exported to main
 func TVSetUp() string {
 	//Start the timer
 	startTime := time.Now().Unix()
@@ -859,6 +859,24 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		TvSI.Series = "HFord1923"
 		log.Println("Starting HFord1923")
 		fmt.Println(filename[16:boo])
+
+	// /media/pi/PiTB/media/ TVShows/BlackKight/s1/BlackKight S01E01 Glorious Purpose.mp4
+	case strings.Contains(apath, "BlackKight"):
+		_, filename := path.Split(apath)
+		fspath := apath[21:]
+		boo := len(filename) - 4
+		TvSI.FilePath = apath
+		TvSI.MediaID = UUID()
+		TvSI.Genre = "TVShows"
+		TvSI.TVShowPicPath = tvshowpicPath
+		TvSI.TvFSPath = fspath
+		TvSI.Catagory = "BlackKight"
+		TvSI.Season = filename[12:14]
+		TvSI.Episode = filename[15:17]
+		TvSI.Title = filename[17:boo]
+		TvSI.Series = "BlackKight"
+		log.Println("Starting BlackKight")
+		fmt.Println(filename[17:boo])
 
 	}
 	return

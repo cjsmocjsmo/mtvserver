@@ -1,5 +1,5 @@
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 // LICENSE: GNU General Public License, version 2 (GPLv2)
 // Copyright 2016, Charlie J. Smotherman
 //
@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 package main
 
 import (
@@ -168,12 +168,6 @@ func IntOldies(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, OldiesMedia)
 }
-
-
-
-
-
-
 
 func IntDramaHandler(c echo.Context) error {
 	log.Println("IntDramaHandler started")
@@ -1368,4 +1362,20 @@ func IntHFord1923Handler(c echo.Context) error {
 		log.Println(errG)
 	}
 	return c.JSON(http.StatusOK, HFord1923Media)
+}
+
+func IntBlackKnightHandler(c echo.Context) error {
+	log.Println("HFord1923 started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var BlackKnightMedia []map[string]string
+	b1 := bson.M{"catagory": "BlackKnight", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&BlackKnightMedia)
+	if errG != nil {
+		log.Println("BlackKnight db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, BlackKnightMedia)
 }
