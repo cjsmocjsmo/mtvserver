@@ -861,7 +861,7 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		fmt.Println(filename[16:boo])
 
 	// /media/pi/PiTB/media/ TVShows/BlackKight/s1/BlackKight S01E01 Glorious Purpose.mp4
-	case strings.Contains(apath, "BlackKight"):
+	case strings.Contains(apath, "BlackKnight"):
 		_, filename := path.Split(apath)
 		fspath := apath[21:]
 		boo := len(filename) - 4
@@ -870,12 +870,12 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		TvSI.Genre = "TVShows"
 		TvSI.TVShowPicPath = tvshowpicPath
 		TvSI.TvFSPath = fspath
-		TvSI.Catagory = "BlackKight"
+		TvSI.Catagory = "BlackKnight"
 		TvSI.Season = filename[12:14]
 		TvSI.Episode = filename[15:17]
 		TvSI.Title = filename[17:boo]
-		TvSI.Series = "BlackKight"
-		log.Println("Starting BlackKight")
+		TvSI.Series = "BlackKnight"
+		log.Println("Starting BlackKnight")
 		fmt.Println(filename[17:boo])
 
 	}
