@@ -1174,11 +1174,12 @@ func IntArnoldHandler(c echo.Context) error {
 
 func IntPrehistoricPlanetHandler(c echo.Context) error {
 	log.Println("PrehistoricPlanet started")
+	s1 := c.QueryParam("season")
 	ses := DBcon()
 	defer ses.Close()
 	MTyc := ses.DB("tvgobs").C("tvgobs")
 	var PrehistoricPlanetMedia []map[string]string
-	b1 := bson.M{"catagory": "PrehistoricPlanet", "season": `01`}
+	b1 := bson.M{"catagory": "PrehistoricPlanet", "season": s1}
 	b2 := bson.M{"_id": 0}
 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&PrehistoricPlanetMedia)
 	if errG != nil {
