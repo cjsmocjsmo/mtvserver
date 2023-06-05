@@ -1380,3 +1380,19 @@ func IntBlackKnightHandler(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, BlackKnightMedia)
 }
+
+func IntFooBarHandler(c echo.Context) error {
+	log.Println("FooBar started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var FooBarMedia []map[string]string
+	b1 := bson.M{"catagory": "FooBar", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&FooBarMedia)
+	if errG != nil {
+		log.Println("FooBar db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, FooBarMedia)
+}

@@ -121,6 +121,8 @@ func main() {
 	e.GET("/IAmGroot", IntIAmGrootHandler)
 	e.GET("/SheHulk", IntSheHulkHandler)
 
+	e.GET("/FooBar", IntFooBarHandler)
+
 	e.Static("/static", "/root/static")
 	e.Logger.Fatal(e.Start(":8888"))
 }

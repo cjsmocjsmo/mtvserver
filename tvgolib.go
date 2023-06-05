@@ -878,6 +878,27 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		log.Println("Starting BlackKnight")
 		fmt.Println(filename[18:boo])
 
+	
+
+	// /media/pi/PiTB/media/ TVShows/FooBar/s1/FooBar S01E01 Glorious Purpose.mp4
+	case strings.Contains(apath, "FooBar"):
+		_, filename := path.Split(apath)
+		fspath := apath[21:]
+		boo := len(filename) - 4
+		TvSI.FilePath = apath
+		TvSI.MediaID = UUID()
+		TvSI.Genre = "TVShows"
+		TvSI.TVShowPicPath = tvshowpicPath
+		TvSI.TvFSPath = fspath
+		TvSI.Catagory = "FooBar"
+		TvSI.Season = filename[8:10]
+		TvSI.Episode = filename[12:14]
+		TvSI.Title = filename[14:boo]
+		TvSI.Series = "FooBar"
+		log.Println("Starting FooBar")
+		fmt.Println(filename[14:boo])
+
 	}
+
 	return
 }
