@@ -1142,11 +1142,12 @@ func IntMoonKnightHandler(c echo.Context) error {
 
 func IntStrangeNewWorldsHandler(c echo.Context) error {
 	log.Println("StrangeNewWorlds started")
+	s1 := c.QueryParam("season")
 	ses := DBcon()
 	defer ses.Close()
 	MTyc := ses.DB("tvgobs").C("tvgobs")
 	var StrangeNewWorldsMedia []map[string]string
-	b1 := bson.M{"catagory": "StrangeNewWorlds", "season": `01`}
+	b1 := bson.M{"catagory": "StrangeNewWorlds", "season": s1}
 	b2 := bson.M{"_id": 0}
 	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&StrangeNewWorldsMedia)
 	if errG != nil {
