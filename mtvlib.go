@@ -1366,20 +1366,20 @@ func IntHFord1923Handler(c echo.Context) error {
 	return c.JSON(http.StatusOK, HFord1923Media)
 }
 
-func IntBlackKnightHandler(c echo.Context) error {
+func IntSecretInvasionHandler(c echo.Context) error {
 	log.Println("HFord1923 started")
 	ses := DBcon()
 	defer ses.Close()
 	MTyc := ses.DB("tvgobs").C("tvgobs")
-	var BlackKnightMedia []map[string]string
-	b1 := bson.M{"catagory": "BlackKnight", "season": `01`}
+	var SecretInvasionMedia []map[string]string
+	b1 := bson.M{"catagory": "SecretInvasion", "season": `01`}
 	b2 := bson.M{"_id": 0}
-	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&BlackKnightMedia)
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&SecretInvasionMedia)
 	if errG != nil {
-		log.Println("BlackKnight db call error")
+		log.Println("SecretInvasion db call error")
 		log.Println(errG)
 	}
-	return c.JSON(http.StatusOK, BlackKnightMedia)
+	return c.JSON(http.StatusOK, SecretInvasionMedia)
 }
 
 func IntFooBarHandler(c echo.Context) error {

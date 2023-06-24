@@ -860,24 +860,6 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		log.Println("Starting HFord1923")
 		fmt.Println(filename[16:boo])
 
-	// /media/pi/PiTB/media/ TVShows/BlackKight/s1/BlackKight S01E01 Glorious Purpose.mp4
-	case strings.Contains(apath, "BlackKnight"):
-		_, filename := path.Split(apath)
-		fspath := apath[21:]
-		boo := len(filename) - 4
-		TvSI.FilePath = apath
-		TvSI.MediaID = UUID()
-		TvSI.Genre = "TVShows"
-		TvSI.TVShowPicPath = tvshowpicPath
-		TvSI.TvFSPath = fspath
-		TvSI.Catagory = "BlackKnight"
-		TvSI.Season = filename[13:15]
-		TvSI.Episode = filename[16:18]
-		TvSI.Title = filename[18:boo]
-		TvSI.Series = "BlackKnight"
-		log.Println("Starting BlackKnight")
-		fmt.Println(filename[18:boo])
-
 	// /media/pi/PiTB/media/ TVShows/FooBar/s1/FooBar S01E01 Glorious Purpose.mp4
 	case strings.Contains(apath, "FooBar"):
 		_, filename := path.Split(apath)
@@ -895,6 +877,24 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		TvSI.Series = "FooBar"
 		log.Println("Starting FooBar")
 		fmt.Println(filename[14:boo])
+
+		// /media/pi/PiTB/media/ TVShows/SecretInvasion/s1/Secret Invasion S01E01 Glorious Purpose.mp4
+	case strings.Contains(apath, "SecretInvasion"):
+		_, filename := path.Split(apath)
+		fspath := apath[21:]
+		boo := len(filename) - 4
+		TvSI.FilePath = apath
+		TvSI.MediaID = UUID()
+		TvSI.Genre = "TVShows"
+		TvSI.TVShowPicPath = tvshowpicPath
+		TvSI.TvFSPath = fspath
+		TvSI.Catagory = "SecretInvasion"
+		TvSI.Season = filename[16:18]
+		TvSI.Episode = filename[19:21]
+		TvSI.Title = filename[21:boo]
+		TvSI.Series = "SecretInvasion"
+		log.Println("Starting SecretInvasion")
+		fmt.Println(filename[21:boo])
 
 	}
 
