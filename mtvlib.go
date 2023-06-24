@@ -1367,7 +1367,7 @@ func IntHFord1923Handler(c echo.Context) error {
 }
 
 func IntSecretInvasionHandler(c echo.Context) error {
-	log.Println("HFord1923 started")
+	log.Println("SecretInvasion started")
 	ses := DBcon()
 	defer ses.Close()
 	MTyc := ses.DB("tvgobs").C("tvgobs")
