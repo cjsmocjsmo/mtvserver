@@ -1397,3 +1397,19 @@ func IntFooBarHandler(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, FooBarMedia)
 }
+
+func IntSiloHandler(c echo.Context) error {
+	log.Println("Silo started")
+	ses := DBcon()
+	defer ses.Close()
+	MTyc := ses.DB("tvgobs").C("tvgobs")
+	var SiloMedia []map[string]string
+	b1 := bson.M{"catagory": "Silo", "season": `01`}
+	b2 := bson.M{"_id": 0}
+	errG := MTyc.Find(b1).Select(b2).Sort("episode").All(&SiloMedia)
+	if errG != nil {
+		log.Println("Silo db call error")
+		log.Println(errG)
+	}
+	return c.JSON(http.StatusOK, SiloMedia)
+}

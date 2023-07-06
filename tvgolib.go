@@ -896,6 +896,24 @@ func getTvShowInfo(apath string, tvshowpicPath string) (TvSI TVShowInfoS) {
 		log.Println("Starting SecretInvasion")
 		fmt.Println(filename[22:boo])
 
+		// /media/pi/PiTB/media/ TVShows/Silo/s1/Silo S01E01 Glorious Purpose.mp4
+	case strings.Contains(apath, "Silo"):
+		_, filename := path.Split(apath)
+		fspath := apath[21:]
+		boo := len(filename) - 4
+		TvSI.FilePath = apath
+		TvSI.MediaID = UUID()
+		TvSI.Genre = "TVShows"
+		TvSI.TVShowPicPath = tvshowpicPath
+		TvSI.TvFSPath = fspath
+		TvSI.Catagory = "Silo"
+		TvSI.Season = filename[6:8]
+		TvSI.Episode = filename[9:11]
+		TvSI.Title = filename[11:boo]
+		TvSI.Series = "Silo"
+		log.Println("Starting Silo")
+		fmt.Println(filename[11:boo])
+
 	}
 
 	return

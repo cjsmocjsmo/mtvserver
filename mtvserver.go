@@ -79,7 +79,6 @@ func main() {
 	e.GET("/Prodigy", IntProdigyHandler)
 	e.GET("/StrangeNewWorlds", IntStrangeNewWorldsHandler)
 	e.GET("/LowerDecks", IntLowerDecksHandler)
-
 	e.GET("/Orville", IntOrvilleHandler)
 	e.GET("/LostInSpace", IntLostInSpaceHandler)
 	e.GET("/AlteredCarbon", IntAlteredCarbonHandler)
@@ -97,12 +96,9 @@ func main() {
 	e.GET("/TheLordOfTheRingsTheRingsOfPower", IntTheLordOfTheRingsTheRingsOfPowerHandler)
 	e.GET("/NightSky", IntNightSkyHandler)
 	e.GET("/PrehistoricPlanet", IntPrehistoricPlanetHandler)
-
 	e.GET("/TheLastOfUs", IntTheLastOfUsHandler)
 	e.GET("/1923", IntHFord1923Handler)
-
 	e.GET("/SecretInvasion", IntSecretInvasionHandler)
-
 	e.GET("/Mandalorian", IntMandalorianHandler)
 	e.GET("/BookOfBobaFett", IntBookOfBobaFettHandler)
 	e.GET("/TheBadBatch", IntTheBadBatchHandler)
@@ -110,7 +106,6 @@ func main() {
 	e.GET("/Andor", IntAndorHandler)
 	e.GET("/TalesOfTheJedi", IntTalesOfTheJediHandler)
 	e.GET("/Visions", IntVisionsHandler)
-
 	e.GET("/WandaVision", IntWandaVisionHandler)
 	e.GET("/FalconWinterSoldier", IntFalconWinterSoldierHandler)
 	e.GET("/Loki", IntLokiHandler)
@@ -120,8 +115,8 @@ func main() {
 	e.GET("/MSMarvel", IntMSMarvelHandler)
 	e.GET("/IAmGroot", IntIAmGrootHandler)
 	e.GET("/SheHulk", IntSheHulkHandler)
-
 	e.GET("/FooBar", IntFooBarHandler)
+	e.GET("Silo", IntSiloHandler)
 
 	e.Static("/static", "/root/static")
 	e.Logger.Fatal(e.Start(":8888"))
