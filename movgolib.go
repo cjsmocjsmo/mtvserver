@@ -31,7 +31,7 @@ func isDirEmpty(name string) (bool, error) {
 	return false, err
 }
 
-//ProcessMovs is needed in update
+// ProcessMovs is needed in update
 func ProcessMovs(pAth string) {
 	log.Println("Process_Movs has started")
 	movpicPath, httppicPath := FindPicPaths(pAth, os.Getenv("MOVIEGOBS_NO_ART_PIC_PATH"))
@@ -165,7 +165,7 @@ func picUpdateStatus() (updateStat bool) {
 	return
 }
 
-//MOVSetup is exported to main
+// MOVSetup is exported to main
 func MOVSetup() string {
 	//Start the timer
 	starttime := time.Now().Unix()
@@ -327,6 +327,10 @@ func GetMovieInfo(apath string, movpicInfo string, httppicInfo string) (MovInfo 
 		MovInfo.Catagory = "Buzz"
 	case strings.Contains(apath, "Oldies"):
 		MovInfo.Catagory = "Oldies"
+	case strings.Contains(apath, "BruceLee"):
+		MovInfo.Catagory = "BruceLee"
+	case strings.Contains(apath, "ChuckNorris"):
+		MovInfo.Catagory = "ChuckNorris"
 	}
 	return
 }
