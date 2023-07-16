@@ -34,6 +34,8 @@ func main() {
 
 	e.GET("/Action", IntActionHandler)
 	e.GET("/Arnold", IntArnoldHandler)
+	e.GET("/BruceLee", IntBruceLeeHandler)
+	e.GET("/ChuckNorris", IntChuckNorrisHandler)
 
 	e.GET("/Cartoons", IntCartoonsHandler)
 	e.GET("/TinkerBell", IntTinkerBell)

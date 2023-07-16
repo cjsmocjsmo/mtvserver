@@ -584,6 +584,40 @@ func IntTransformersHandler(c echo.Context) error {
 	return c.JSON(http.StatusOK, TransformersMedia)
 }
 
+func IntBruceLeeHandler(c echo.Context) error {
+	log.Println("IntBruceLeeHandler start")
+	ses := DBcon()
+	defer ses.Close()
+	MTc := ses.DB("moviegobs").C("moviegobs")
+	var BruceLeeMedia []map[string]string
+	b1 := bson.M{"catagory": "BruceLee"}
+	b2 := bson.M{"_id": 0}
+	err := MTc.Find(b1).Select(b2).All(&BruceLeeMedia)
+	if err != nil {
+		log.Println("BruceLeeHandler db call error")
+		log.Println(err)
+	}
+	log.Println(BruceLeeMedia)
+	return c.JSON(http.StatusOK, BruceLeeMedia)
+}
+
+func IntChuckNorrisHandler(c echo.Context) error {
+	log.Println("IntBruceLeeHandler start")
+	ses := DBcon()
+	defer ses.Close()
+	MTc := ses.DB("moviegobs").C("moviegobs")
+	var BruceLeeMedia []map[string]string
+	b1 := bson.M{"catagory": "BruceLee"}
+	b2 := bson.M{"_id": 0}
+	err := MTc.Find(b1).Select(b2).All(&BruceLeeMedia)
+	if err != nil {
+		log.Println("BruceLeeHandler db call error")
+		log.Println(err)
+	}
+	log.Println(BruceLeeMedia)
+	return c.JSON(http.StatusOK, BruceLeeMedia)
+}
+
 // func playMediaReactHandler(c echo.Context) error {
 // 	log.Println(" started")
 // 	u, err := url.Parse(r.URL.String())
