@@ -602,20 +602,20 @@ func IntBruceLeeHandler(c echo.Context) error {
 }
 
 func IntChuckNorrisHandler(c echo.Context) error {
-	log.Println("IntBruceLeeHandler start")
+	log.Println("IntChuckNorrisHandler start")
 	ses := DBcon()
 	defer ses.Close()
 	MTc := ses.DB("moviegobs").C("moviegobs")
-	var BruceLeeMedia []map[string]string
-	b1 := bson.M{"catagory": "BruceLee"}
+	var ChuckNorrisMedia []map[string]string
+	b1 := bson.M{"catagory": "ChuckNorris"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&BruceLeeMedia)
+	err := MTc.Find(b1).Select(b2).All(&ChuckNorrisMedia)
 	if err != nil {
-		log.Println("BruceLeeHandler db call error")
+		log.Println("ChuckNorrisHandler db call error")
 		log.Println(err)
 	}
-	log.Println(BruceLeeMedia)
-	return c.JSON(http.StatusOK, BruceLeeMedia)
+	log.Println(ChuckNorrisMedia)
+	return c.JSON(http.StatusOK, ChuckNorrisMedia)
 }
 
 // func playMediaReactHandler(c echo.Context) error {
