@@ -1,5 +1,5 @@
 # FROM arm32v7/golang:1.12.13 AS builder
-FROM golang:latest AS builder
+FROM golang:bookworm AS builder
 
 RUN mkdir /go/src/mtv
 WORKDIR /go/src/mtv

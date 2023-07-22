@@ -48,7 +48,7 @@ func IntActionHandler(c echo.Context) error {
 	var ActionMedia []map[string]string
 	b1 := bson.M{"catagory": "Action"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&ActionMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&ActionMedia)
 	if err != nil {
 		log.Println("ActionHandler db call error")
 		log.Println(err)
@@ -65,7 +65,7 @@ func IntCartoonsHandler(c echo.Context) error {
 	b1 := bson.M{"catagory": "Cartoons"}
 	b2 := bson.M{"_id": 0}
 	var CartoonMedia []map[string]string
-	err := MTc.Find(b1).Select(b2).All(&CartoonMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&CartoonMedia)
 	if err != nil {
 		log.Println("cartoonHandler db call error")
 		log.Println(err)
@@ -81,7 +81,7 @@ func IntComedyHandler(c echo.Context) error {
 	var ComedyMedia []map[string]string
 	b1 := bson.M{"catagory": "Comedy"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&ComedyMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&ComedyMedia)
 	if err != nil {
 		log.Println("comedyHandler db call error")
 		log.Println(err)
@@ -97,7 +97,7 @@ func IntTinkerBell(c echo.Context) error {
 	var TinkerBellMedia []map[string]string
 	b1 := bson.M{"catagory": "TinkerBell"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&TinkerBellMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&TinkerBellMedia)
 	if err != nil {
 		log.Println("TinkerBell db call error")
 		log.Println(err)
@@ -113,7 +113,7 @@ func IntCharlieBrown(c echo.Context) error {
 	var CharlieBrownMedia []map[string]string
 	b1 := bson.M{"catagory": "CharlieBrown"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&CharlieBrownMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&CharlieBrownMedia)
 	if err != nil {
 		log.Println("CharlieBrown db call error")
 		log.Println(err)
@@ -129,7 +129,7 @@ func IntMinions(c echo.Context) error {
 	var MinionsMedia []map[string]string
 	b1 := bson.M{"catagory": "Minions"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&MinionsMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&MinionsMedia)
 	if err != nil {
 		log.Println("Minions db call error")
 		log.Println(err)
@@ -145,7 +145,7 @@ func IntBuzz(c echo.Context) error {
 	var BuzzMedia []map[string]string
 	b1 := bson.M{"catagory": "Buzz"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&BuzzMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&BuzzMedia)
 	if err != nil {
 		log.Println("Buzz db call error")
 		log.Println(err)
@@ -161,7 +161,7 @@ func IntOldies(c echo.Context) error {
 	var OldiesMedia []map[string]string
 	b1 := bson.M{"catagory": "Oldies"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&OldiesMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&OldiesMedia)
 	if err != nil {
 		log.Println("Oldies db call error")
 		log.Println(err)
@@ -177,7 +177,7 @@ func IntDramaHandler(c echo.Context) error {
 	var DramaMedia []map[string]string
 	b1 := bson.M{"catagory": "Drama"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&DramaMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&DramaMedia)
 	if err != nil {
 		log.Println("dramaHandler db call error")
 		log.Println(err)
@@ -193,7 +193,7 @@ func IntGodzillaHandler(c echo.Context) error {
 	var GodzillaMedia []map[string]string
 	b1 := bson.M{"catagory": "Godzilla"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&GodzillaMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&GodzillaMedia)
 	if err != nil {
 		log.Println("godzillaHandler db call error")
 		log.Println(err)
@@ -225,7 +225,7 @@ func IntJohnWayneHandler(c echo.Context) error {
 	var JohnWayneMedia []map[string]string
 	b1 := bson.M{"catagory": "JohnWayne"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&JohnWayneMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&JohnWayneMedia)
 	if err != nil {
 		log.Println("johnwayneHandler db call error")
 		log.Println(err)
@@ -241,7 +241,7 @@ func IntJurassicParkHandler(c echo.Context) error {
 	var JurassicParkMedia []map[string]string
 	b1 := bson.M{"catagory": "JurassicPark"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&JurassicParkMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&JurassicParkMedia)
 	if err != nil {
 		log.Println("JurassicParkHandler db call error")
 		log.Println(err)
@@ -257,7 +257,7 @@ func IntKingsManHandler(c echo.Context) error {
 	var KingsmanMedia []map[string]string
 	b1 := bson.M{"catagory": "Kingsman"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&KingsmanMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&KingsmanMedia)
 	if err != nil {
 		log.Println("Kingsman db call error")
 		log.Println(err)
@@ -273,7 +273,7 @@ func IntHarryPotterHandler(c echo.Context) error {
 	var HarryPotterMedia []map[string]string
 	b1 := bson.M{"catagory": "HarryPotter"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&HarryPotterMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&HarryPotterMedia)
 	if err != nil {
 		log.Println(err)
 	}
@@ -288,7 +288,7 @@ func IntMenInBlackHandler(c echo.Context) error {
 	var MenInBlackMedia []map[string]string
 	b1 := bson.M{"catagory": "MenInBlack"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&MenInBlackMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&MenInBlackMedia)
 	if err != nil {
 		log.Println(err)
 	}
@@ -303,7 +303,7 @@ func IntMiscHandler(c echo.Context) error {
 	var MiscMedia []map[string]string
 	b1 := bson.M{"catagory": "Misc"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&MiscMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&MiscMedia)
 	if err != nil {
 		log.Println(err)
 	}
@@ -318,7 +318,7 @@ func IntSciFiHandler(c echo.Context) error {
 	var SciFiMedia []map[string]string
 	b1 := bson.M{"catagory": "SciFi"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&SciFiMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&SciFiMedia)
 	if err != nil {
 		log.Println("InitSciFiHandler db call error")
 		log.Println(err)
@@ -334,7 +334,7 @@ func IntStarTrekHandler(c echo.Context) error {
 	var StarTrekMedia []map[string]string
 	b1 := bson.M{"catagory": "StarTrek"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&StarTrekMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&StarTrekMedia)
 	if err != nil {
 		log.Println("StarTrekHandler db call error")
 		log.Println(err)
@@ -350,7 +350,7 @@ func IntStarWarsHandler(c echo.Context) error {
 	var StarWarsMedia []map[string]string
 	b1 := bson.M{"catagory": "StarWars"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&StarWarsMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&StarWarsMedia)
 	if err != nil {
 		log.Printf("StarWarsHandler db call error")
 		log.Println(err)
@@ -366,7 +366,7 @@ func IntSuperHerosHandler(c echo.Context) error {
 	var SuperHerosMedia []map[string]string
 	b1 := bson.M{"catagory": "SuperHeros"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&SuperHerosMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&SuperHerosMedia)
 	if err != nil {
 		log.Printf("SuperHerosHandler db call error")
 		log.Println(err)
@@ -382,7 +382,7 @@ func IntTremorsHandler(c echo.Context) error {
 	var TremorsMedia []map[string]string
 	b1 := bson.M{"catagory": "Tremors"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&TremorsMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&TremorsMedia)
 	if err != nil {
 		log.Printf("TremorsHandler db call error")
 		log.Println(err)
@@ -398,7 +398,7 @@ func IntJohnWickHandler(c echo.Context) error {
 	var JohnWickMedia []map[string]string
 	b1 := bson.M{"catagory": "JohnWick"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&JohnWickMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&JohnWickMedia)
 	if err != nil {
 		log.Printf("JohnWickHandler db call error")
 		log.Println(err)
@@ -414,7 +414,7 @@ func IntPiratesHandler(c echo.Context) error {
 	var PiratesMedia []map[string]string
 	b1 := bson.M{"catagory": "Pirates"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&PiratesMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&PiratesMedia)
 	if err != nil {
 		log.Printf("PiratesHandler db call error")
 		log.Println(err)
@@ -430,7 +430,7 @@ func IntBruceWillisHandler(c echo.Context) error {
 	var DieHardMedia []map[string]string
 	b1 := bson.M{"catagory": "BruceWillis"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&DieHardMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&DieHardMedia)
 	if err != nil {
 		log.Printf("BruceWillisHandler db call error")
 		log.Println(err)
@@ -446,7 +446,7 @@ func IntFantasyHandler(c echo.Context) error {
 	var FantasyMedia []map[string]string
 	b1 := bson.M{"catagory": "Fantasy"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&FantasyMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&FantasyMedia)
 	if err != nil {
 		log.Printf("FantasyHandler db call error")
 		log.Println(err)
@@ -462,7 +462,7 @@ func IntRiddickHandler(c echo.Context) error {
 	var RiddickMedia []map[string]string
 	b1 := bson.M{"catagory": "Riddick"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&RiddickMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&RiddickMedia)
 	if err != nil {
 		log.Printf("RiddickHandler db call error")
 		log.Println(err)
@@ -478,7 +478,7 @@ func IntTomCruizeHandler(c echo.Context) error {
 	var TCMedia []map[string]string
 	b1 := bson.M{"catagory": "TomCruize"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&TCMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&TCMedia)
 	if err != nil {
 		log.Printf("TomCruizeHandler db call error")
 		log.Println(err)
@@ -494,7 +494,7 @@ func IntXMenHandler(c echo.Context) error {
 	var XMenMedia []map[string]string
 	b1 := bson.M{"catagory": "XMen"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&XMenMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&XMenMedia)
 	if err != nil {
 		log.Printf("XMenHandler db call error")
 		log.Println(err)
@@ -510,7 +510,7 @@ func IntDocumentaryHandler(c echo.Context) error {
 	var DocumentaryMedia []map[string]string
 	b1 := bson.M{"catagory": "Documentary"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&DocumentaryMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&DocumentaryMedia)
 	if err != nil {
 		log.Println("DocumentaryHandler db call error")
 		log.Println(err)
@@ -526,7 +526,7 @@ func IntTheRockHandler(c echo.Context) error {
 	var TheRockMedia []map[string]string
 	b1 := bson.M{"catagory": "TheRock"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&TheRockMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&TheRockMedia)
 	if err != nil {
 		log.Println("TheRockHandler db call error")
 		log.Println(err)
@@ -542,7 +542,7 @@ func IntNicolasCageHandler(c echo.Context) error {
 	var NicolasCageMedia []map[string]string
 	b1 := bson.M{"catagory": "NicolasCage"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&NicolasCageMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&NicolasCageMedia)
 	if err != nil {
 		log.Println("NicolasCage db call error")
 		log.Println(err)
@@ -558,7 +558,7 @@ func IntJamesBondHandler(c echo.Context) error {
 	var JamesBondMedia []map[string]string
 	b1 := bson.M{"catagory": "JamesBond"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&JamesBondMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&JamesBondMedia)
 	if err != nil {
 		log.Println("JamesBondHandler db call error")
 		log.Println(err)
@@ -575,7 +575,7 @@ func IntTransformersHandler(c echo.Context) error {
 	var TransformersMedia []map[string]string
 	b1 := bson.M{"catagory": "Transformers"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&TransformersMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&TransformersMedia)
 	if err != nil {
 		log.Println("TransformersHandler db call error")
 		log.Println(err)
@@ -592,7 +592,7 @@ func IntBruceLeeHandler(c echo.Context) error {
 	var BruceLeeMedia []map[string]string
 	b1 := bson.M{"catagory": "BruceLee"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&BruceLeeMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&BruceLeeMedia)
 	if err != nil {
 		log.Println("BruceLeeHandler db call error")
 		log.Println(err)
@@ -609,7 +609,7 @@ func IntChuckNorrisHandler(c echo.Context) error {
 	var ChuckNorrisMedia []map[string]string
 	b1 := bson.M{"catagory": "ChuckNorris"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&ChuckNorrisMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&ChuckNorrisMedia)
 	if err != nil {
 		log.Println("ChuckNorrisHandler db call error")
 		log.Println(err)
@@ -1199,7 +1199,7 @@ func IntArnoldHandler(c echo.Context) error {
 	var arnoldMedia []map[string]string
 	b1 := bson.M{"catagory": "Arnold"}
 	b2 := bson.M{"_id": 0}
-	err := MTc.Find(b1).Select(b2).All(&arnoldMedia)
+	err := MTc.Find(b1).Select(b2).Sort("year").All(&arnoldMedia)
 	if err != nil {
 		log.Printf("arnoldMedia db call error")
 		log.Println(err)
